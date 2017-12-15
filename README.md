@@ -1,12 +1,12 @@
- # Сборка допотопного PHP 5.2.17 и FPM
+ # РЎР±РѕСЂРєР° РґРѕРїРѕС‚РѕРїРЅРѕРіРѕ PHP 5.2.17 Рё FPM
 
-Этот документ родился как плод усилий по восстановлению старого сайта созданного на базе CMS Joomla 1.0.15. Для этого понадобилось :
+Р­С‚РѕС‚ РґРѕРєСѓРјРµРЅС‚ СЂРѕРґРёР»СЃСЏ РєР°Рє РїР»РѕРґ СѓСЃРёР»РёР№ РїРѕ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЋ СЃС‚Р°СЂРѕРіРѕ СЃР°Р№С‚Р° СЃРѕР·РґР°РЅРЅРѕРіРѕ РЅР° Р±Р°Р·Рµ CMS Joomla 1.0.15. Р”Р»СЏ СЌС‚РѕРіРѕ РїРѕРЅР°РґРѕР±РёР»РѕСЃСЊ :
 
 
 
-Для чего понадобился, в числе прочего, PHP 5.2.17: 5http://tokarchuk.ru/2016/03/php-5-2-on-ubuntu-14-04/
-хорошая (но старая) инструкция разрешения ошибок компиляции http://denik.od.ua/rasprostranennye_oshibki_pri_kompilirovanii_php Рекомендуемые для инсталяции пакеты немного устарели и не всегда доспуны, но как минимум может служить поводом «куда копать» для разрешения конфликтов
-Вот тут полезые рекомендации по набору патчей исходников, которые надо применить перед компиляцией.
+Р”Р»СЏ С‡РµРіРѕ РїРѕРЅР°РґРѕР±РёР»СЃСЏ, РІ С‡РёСЃР»Рµ РїСЂРѕС‡РµРіРѕ, PHP 5.2.17: 5http://tokarchuk.ru/2016/03/php-5-2-on-ubuntu-14-04/
+С…РѕСЂРѕС€Р°СЏ (РЅРѕ СЃС‚Р°СЂР°СЏ) РёРЅСЃС‚СЂСѓРєС†РёСЏ СЂР°Р·СЂРµС€РµРЅРёСЏ РѕС€РёР±РѕРє РєРѕРјРїРёР»СЏС†РёРё http://denik.od.ua/rasprostranennye_oshibki_pri_kompilirovanii_php Р РµРєРѕРјРµРЅРґСѓРµРјС‹Рµ РґР»СЏ РёРЅСЃС‚Р°Р»СЏС†РёРё РїР°РєРµС‚С‹ РЅРµРјРЅРѕРіРѕ СѓСЃС‚Р°СЂРµР»Рё Рё РЅРµ РІСЃРµРіРґР° РґРѕСЃРїСѓРЅС‹, РЅРѕ РєР°Рє РјРёРЅРёРјСѓРј РјРѕР¶РµС‚ СЃР»СѓР¶РёС‚СЊ РїРѕРІРѕРґРѕРј В«РєСѓРґР° РєРѕРїР°С‚СЊВ» РґР»СЏ СЂР°Р·СЂРµС€РµРЅРёСЏ РєРѕРЅС„Р»РёРєС‚РѕРІ
+Р’РѕС‚ С‚СѓС‚ РїРѕР»РµР·С‹Рµ СЂРµРєРѕРјРµРЅРґР°С†РёРё РїРѕ РЅР°Р±РѕСЂСѓ РїР°С‚С‡РµР№ РёСЃС…РѕРґРЅРёРєРѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅР°РґРѕ РїСЂРёРјРµРЅРёС‚СЊ РїРµСЂРµРґ РєРѕРјРїРёР»СЏС†РёРµР№.
 
 sudo apt-get install libxml2-dev libmysqlclient-dev libcurl4-gnutls-dev libpng12-dev libjpeg62-turbo-dev make libxslt1-dev libbz2-dev libmcrypt-dev libmhash-dev libfcgi-dev libmhash-dev libjpeg-dev checkinstall
 sudo apt-get install mysql-server
@@ -15,7 +15,7 @@ sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so.62.0.0 /usr/lib/libjpeg.so
 sudo ln -s /lib/x86_64-linux-gnu/libpng12.so.0.50.0 /usr/lib/libpng.so
 sudo ln -s /usr/lib/x86_64-linux-gnu/libmysqlclient.so.18.0.0 /usr/lib/libmysqlclient.so
 
-или
+РёР»Рё
 sudo ln -s /usr/lib/i386-linux-gnu/libjpeg.so.62.0.0 /usr/lib/libjpeg.so
 sudo ln -s /lib/i386-linux-gnu/libpng12.so.0.50.0 /usr/lib/libpng.so
 sudo ln -s /usr/lib/i368-linux-gnu/libmysqlclient.so.18.0.0 /usr/lib/libmysqlclient.so
@@ -24,9 +24,9 @@ wget http://museum.php.net/php5/php-5.2.17.tar.gz
 wget https://github.com/TommyLau/docker-lnmpa/raw/master/php/5.2/php-5.2.17-libxml2.patch
 wget https://github.com/TommyLau/docker-lnmpa/raw/master/php/5.2/php-5.2.17-openssl.patch
 # PHP-FPM
-FastCGI Process Manager, "Менеджер процессов FastCGI". Это альтернативная реализация FastCGI режима в PHP с несколькими дополнительными возможностя-ми, которые обычно используются для высоконагруженных сайтов.
-Изначально PHP-FPM представлял из себя набор патчей от Андрея Нигматулина, которые устраняли ряд проблем, мешающих полноценно использовать PHP в режиме FastCGI (список улучшений). С версии PHP 5.3 набор патчей включён в ядро, а дополнительные возможности PHP-FPM включаются флагом при компиляции.
-PHP-FPM используется в основном в связке с Nginx, без установки Apache.
+FastCGI Process Manager, "РњРµРЅРµРґР¶РµСЂ РїСЂРѕС†РµСЃСЃРѕРІ FastCGI". Р­С‚Рѕ Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅР°СЏ СЂРµР°Р»РёР·Р°С†РёСЏ FastCGI СЂРµР¶РёРјР° РІ PHP СЃ РЅРµСЃРєРѕР»СЊРєРёРјРё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹РјРё РІРѕР·РјРѕР¶РЅРѕСЃС‚СЏ-РјРё, РєРѕС‚РѕСЂС‹Рµ РѕР±С‹С‡РЅРѕ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РґР»СЏ РІС‹СЃРѕРєРѕРЅР°РіСЂСѓР¶РµРЅРЅС‹С… СЃР°Р№С‚РѕРІ.
+РР·РЅР°С‡Р°Р»СЊРЅРѕ PHP-FPM РїСЂРµРґСЃС‚Р°РІР»СЏР» РёР· СЃРµР±СЏ РЅР°Р±РѕСЂ РїР°С‚С‡РµР№ РѕС‚ РђРЅРґСЂРµСЏ РќРёРіРјР°С‚СѓР»РёРЅР°, РєРѕС‚РѕСЂС‹Рµ СѓСЃС‚СЂР°РЅСЏР»Рё СЂСЏРґ РїСЂРѕР±Р»РµРј, РјРµС€Р°СЋС‰РёС… РїРѕР»РЅРѕС†РµРЅРЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ PHP РІ СЂРµР¶РёРјРµ FastCGI (СЃРїРёСЃРѕРє СѓР»СѓС‡С€РµРЅРёР№). РЎ РІРµСЂСЃРёРё PHP 5.3 РЅР°Р±РѕСЂ РїР°С‚С‡РµР№ РІРєР»СЋС‡С‘РЅ РІ СЏРґСЂРѕ, Р° РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё PHP-FPM РІРєР»СЋС‡Р°СЋС‚СЃСЏ С„Р»Р°РіРѕРј РїСЂРё РєРѕРјРїРёР»СЏС†РёРё.
+PHP-FPM РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РѕСЃРЅРѕРІРЅРѕРј РІ СЃРІСЏР·РєРµ СЃ Nginx, Р±РµР· СѓСЃС‚Р°РЅРѕРІРєРё Apache.
 
 wget "http://php-fpm.org/downloads/php-5.2.17-fpm-0.5.14.diff.gz" -O php-fpm.diff.gz
 
@@ -71,35 +71,35 @@ echo $PATH
 
 apt-get mc
 apt-get sudo
-настраиваем sudoers
+РЅР°СЃС‚СЂР°РёРІР°РµРј sudoers
 apt-get htop
 
 --------
 apt-get install nginx
 unlink /etc/nginx/sites-enabled/default
-mkdir -p $HOME/[адрес сайта]/logs
-mkdir -p $HOME/[адрес сайта]/config
-nano $HOME/[адрес сайта]/config intranet_old_nginx.conf
+mkdir -p $HOME/[Р°РґСЂРµСЃ СЃР°Р№С‚Р°]/logs
+mkdir -p $HOME/[Р°РґСЂРµСЃ СЃР°Р№С‚Р°]/config
+nano $HOME/[Р°РґСЂРµСЃ СЃР°Р№С‚Р°]/config intranet_old_nginx.conf
 
-Инструкция тут: http://help.ubuntu.ru/wiki/nginx-phpfpm
+```РРЅСЃС‚СЂСѓРєС†РёСЏ С‚СѓС‚: http://help.ubuntu.ru/wiki/nginx-phpfpm
 #  __  __     __   ___       _                        _
-# |__)(_ \  //  \ /   \     | |                      | | OLD/СТАРЫЙ
+# |__)(_ \  //  \ /   \     | |                      | | OLD/РЎРўРђР Р«Р™
 # | \ __) \/ \__/  | | _ __ | |_ _ __ __ _ _ __   ___| |_~~~~~~~~~~
 # V: 1.0           | || '_ \| __| '__/ _` | '_ \ / _ \ __|
 #                 _| || | | | |_| | | (_| | | | |  __/ |_
 #                 \___/_| |_|\__|_|  \__,_|_| |_|\___|\__|
-# Назначение:   конфиг-файл nginx для сайта Intranet RSVO
-# Расположение: /home/e-serg/intranet-old/config/intranet_old_nginx.conf
+# РќР°Р·РЅР°С‡РµРЅРёРµ:   РєРѕРЅС„РёРі-С„Р°Р№Р» nginx РґР»СЏ СЃР°Р№С‚Р° Intranet RSVO
+# Р Р°СЃРїРѕР»РѕР¶РµРЅРёРµ: /home/e-serg/intranet-old/config/intranet_old_nginx.conf
 
-# Описываем апстрим-потоки которые должен подключить Nginx
-# Для каждого сайта надо настроить свой поток, со своим уникальным именем.
-# Если будете настраивать несколько python (django) сайтов - измените название upstream
+# РћРїРёСЃС‹РІР°РµРј Р°РїСЃС‚СЂРёРј-РїРѕС‚РѕРєРё РєРѕС‚РѕСЂС‹Рµ РґРѕР»Р¶РµРЅ РїРѕРґРєР»СЋС‡РёС‚СЊ Nginx
+# Р”Р»СЏ РєР°Р¶РґРѕРіРѕ СЃР°Р№С‚Р° РЅР°РґРѕ РЅР°СЃС‚СЂРѕРёС‚СЊ СЃРІРѕР№ РїРѕС‚РѕРє, СЃРѕ СЃРІРѕРёРј СѓРЅРёРєР°Р»СЊРЅС‹Рј РёРјРµРЅРµРј.
+# Р•СЃР»Рё Р±СѓРґРµС‚Рµ РЅР°СЃС‚СЂР°РёРІР°С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ python (django) СЃР°Р№С‚РѕРІ - РёР·РјРµРЅРёС‚Рµ РЅР°Р·РІР°РЅРёРµ upstream
 
 upstream php-fpm {
-    # расположение Unix-сокета для взаимодействия с PHP5-FPM сервер
+    # СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ Unix-СЃРѕРєРµС‚Р° РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ PHP5-FPM СЃРµСЂРІРµСЂ
     server unix:/home/e-serg/intranet-old/socket/php-fpm.socket;
     # server unix:/var/run/php5-fpm.sock;
-    # также можно использовать веб-сокет и порт для взаимодействия, но это медленнее
+    # С‚Р°РєР¶Рµ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІРµР±-СЃРѕРєРµС‚ Рё РїРѕСЂС‚ РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ, РЅРѕ СЌС‚Рѕ РјРµРґР»РµРЅРЅРµРµ
     # server 127.0.0.1:12012;
 }
 server {
@@ -123,13 +123,13 @@ server {
 
     location ~ ^(.*\.php)$ {
 
-        fastcgi_pass	php-fpm;       # upstream обрабатывающий обращений fastcgi
-        include		fastcgi_params;               # конфигурационный файл fastcgi;
+        fastcgi_pass	php-fpm;       # upstream РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ РѕР±СЂР°С‰РµРЅРёР№ fastcgi
+        include		fastcgi_params;               # РєРѕРЅС„РёРіСѓСЂР°С†РёРѕРЅРЅС‹Р№ С„Р°Р№Р» fastcgi;
         fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
-        # Вместо переменной "$document_root" можно указать адрес к корневому каталогу сервера и это желательно (см. http://wiki.nginx.org/Pitfalls)
+        # Р’РјРµСЃС‚Рѕ РїРµСЂРµРјРµРЅРЅРѕР№ "$document_root" РјРѕР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ Р°РґСЂРµСЃ Рє РєРѕСЂРЅРµРІРѕРјСѓ РєР°С‚Р°Р»РѕРіСѓ СЃРµСЂРІРµСЂР° Рё СЌС‚Рѕ Р¶РµР»Р°С‚РµР»СЊРЅРѕ (СЃРј. http://wiki.nginx.org/Pitfalls)
         fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;
         fastcgi_param	PATH_TRANSLATED		$document_root$fastcgi_script_name;
-        # См. http://trac.nginx.org/nginx/ticket/321
+        # РЎРј. http://trac.nginx.org/nginx/ticket/321
         set		$path_info		$fastcgi_path_info;
         fastcgi_param	PATH_INFO		$path_info;
         # Additional variables
@@ -140,18 +140,18 @@ server {
         fastcgi_param	SCRIPT_FILENAME $document_root$1;
 
 
-        # uwsgi_pass	php-fpm;       # upstream обрабатывающий обращений uwsgi
-        # include	uwsgi_params;               # конфигурационный файл uwsgi;
-        # uwsgi_read_timeout	1800;     # некоторые запросы на Raspbery pi очень долго обрабатываются.
-        # uwsgi_send_timeout	200;      # на всякий случай время записи в сокет
+        # uwsgi_pass	php-fpm;       # upstream РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰РёР№ РѕР±СЂР°С‰РµРЅРёР№ uwsgi
+        # include	uwsgi_params;               # РєРѕРЅС„РёРіСѓСЂР°С†РёРѕРЅРЅС‹Р№ С„Р°Р№Р» uwsgi;
+        # uwsgi_read_timeout	1800;     # РЅРµРєРѕС‚РѕСЂС‹Рµ Р·Р°РїСЂРѕСЃС‹ РЅР° Raspbery pi РѕС‡РµРЅСЊ РґРѕР»РіРѕ РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‚СЃСЏ.
+        # uwsgi_send_timeout	200;      # РЅР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№ РІСЂРµРјСЏ Р·Р°РїРёСЃРё РІ СЃРѕРєРµС‚
 
     }
-    # Запрет доступа к .htaccess и .htpasswd файлам
+    # Р—Р°РїСЂРµС‚ РґРѕСЃС‚СѓРїР° Рє .htaccess Рё .htpasswd С„Р°Р№Р»Р°Рј
     location ~* "/\.(htaccess|htpasswd)$" {
-        deny all;               # запретить все для всех
-        return 404;             # вернуть код ошибки
+        deny all;               # Р·Р°РїСЂРµС‚РёС‚СЊ РІСЃРµ РґР»СЏ РІСЃРµС…
+        return 404;             # РІРµСЂРЅСѓС‚СЊ РєРѕРґ РѕС€РёР±РєРё
     }
-}
+}```
 
 
 sudo ln -s /home/e-serg/intranet-old/config/intranet_old_nginx.conf /etc/nginx/sites-enabled/
@@ -173,33 +173,33 @@ sudo nano /usr/local/etc/php-fpm.conf
 <value name="error_log">/home/e-serg/intranet-old/logs/php-fpm.log</value>
 <value name="mode">0660</value>
 
-Запускаем fpm
+Р—Р°РїСѓСЃРєР°РµРј fpm
 sudo /usr/local/sbin/php-fpm restart -y /usr/local/etc/php-fpm.conf
 
-Можно убедится в том, что права доступа к сокету установлены верно:
+РњРѕР¶РЅРѕ СѓР±РµРґРёС‚СЃСЏ РІ С‚РѕРј, С‡С‚Рѕ РїСЂР°РІР° РґРѕСЃС‚СѓРїР° Рє СЃРѕРєРµС‚Сѓ СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹ РІРµСЂРЅРѕ:
 
 ls -la /home/e-serg/intranet-old/socket/php-fpm.socket
-Права доступа должны быть «srw-rw—-», владелец «www-data» (группа «www-data» у меня root), например:
+РџСЂР°РІР° РґРѕСЃС‚СѓРїР° РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ В«srw-rwвЂ”-В», РІР»Р°РґРµР»РµС† В«www-dataВ» (РіСЂСѓРїРїР° В«www-dataВ» Сѓ РјРµРЅСЏ root), РЅР°РїСЂРёРјРµСЂ:
 
-srw-rw---- 1 root root 0 дек 13 17:12 /home/e-serg/intranet-old/socket/php-fpm.socket
+srw-rw---- 1 root root 0 РґРµРє 13 17:12 /home/e-serg/intranet-old/socket/php-fpm.socket
 
 sudo service nginx restart
 
-nano $HOME/[адрес сайта]/html/info.php
+nano $HOME/[Р°РґСЂРµСЃ СЃР°Р№С‚Р°]/html/info.php
 
 <?php
 phpinfo();
 ?>
 
-Чтобы FPM запускался автоматически при каждой загрузке нашего Raspberri pi необходимо изменить файл /etc/rc.local. Открываем его на редактирование:
+Р§С‚РѕР±С‹ FPM Р·Р°РїСѓСЃРєР°Р»СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїСЂРё РєР°Р¶РґРѕР№ Р·Р°РіСЂСѓР·РєРµ РЅР°С€РµРіРѕ Raspberri pi РЅРµРѕР±С…РѕРґРёРјРѕ РёР·РјРµРЅРёС‚СЊ С„Р°Р№Р» /etc/rc.local. РћС‚РєСЂС‹РІР°РµРј РµРіРѕ РЅР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ:
 
 sudo nano /etc/rc.local
 
-И перед самой последней строчкой exit 0 вставляем в него команду запуска FPM. Должно получиться примерно так:
+Р РїРµСЂРµРґ СЃР°РјРѕР№ РїРѕСЃР»РµРґРЅРµР№ СЃС‚СЂРѕС‡РєРѕР№ exit 0 РІСЃС‚Р°РІР»СЏРµРј РІ РЅРµРіРѕ РєРѕРјР°РЅРґСѓ Р·Р°РїСѓСЃРєР° FPM. Р”РѕР»Р¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊСЃСЏ РїСЂРёРјРµСЂРЅРѕ С‚Р°Рє:
 
 /usr/local/sbin/php-fpm start -y /usr/local/etc/php-fpm.conf
 exit 0
-Теперь можно перезагрузить наш сервер и убедиться, что FPM запустился и наш сайт [адрес_сайта] открывается в браузере.
+РўРµРїРµСЂСЊ РјРѕР¶РЅРѕ РїРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ РЅР°С€ СЃРµСЂРІРµСЂ Рё СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ FPM Р·Р°РїСѓСЃС‚РёР»СЃСЏ Рё РЅР°С€ СЃР°Р№С‚ [Р°РґСЂРµСЃ_СЃР°Р№С‚Р°] РѕС‚РєСЂС‹РІР°РµС‚СЃСЏ РІ Р±СЂР°СѓР·РµСЂРµ.
 
 Sudo reboot
 
@@ -209,7 +209,7 @@ CREATE DATABASE intranet DEFAULT CHARACTER SET cp1251 DEFAULT COLLATE cp1251_gen
 
 CREATE DATABASE phones2 DEFAULT CHARACTER SET latin1 DEFAULT COLLATE latin1_swedish_ci;
 
-Затем, чтобы наше Django-приложение не работало с базой под аккаунтом супер-пользователя root, создаем нового пользователя базы [user] с паролем «secret_password_mysql_user»:
+Р—Р°С‚РµРј, С‡С‚РѕР±С‹ РЅР°С€Рµ Django-РїСЂРёР»РѕР¶РµРЅРёРµ РЅРµ СЂР°Р±РѕС‚Р°Р»Рѕ СЃ Р±Р°Р·РѕР№ РїРѕРґ Р°РєРєР°СѓРЅС‚РѕРј СЃСѓРїРµСЂ-РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ root, СЃРѕР·РґР°РµРј РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ Р±Р°Р·С‹ [user] СЃ РїР°СЂРѕР»РµРј В«secret_password_mysql_userВ»:
 GRANT ALL PRIVILEGES ON intranet.* TO 'e-serg'@'localhost' IDENTIFIED BY 'qwaseR12';
 GRANT ALL PRIVILEGES ON phones2.* TO 'e-serg'@'localhost' IDENTIFIED BY 'qwaseR12';
 
