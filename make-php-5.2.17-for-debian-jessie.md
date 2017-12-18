@@ -1,15 +1,33 @@
-Для чего понадобился, в числе прочего, PHP 5.2.17: 5http://tokarchuk.ru/2016/03/php-5-2-on-ubuntu-14-04/
-хорошая (но старая) инструкция разрешения ошибок компиляции http://denik.od.ua/rasprostranennye_oshibki_pri_kompilirovanii_php Рекомендуемые для инсталяции пакеты немного устарели и не всегда доспуны, но как минимум может служить поводом «куда копать» для разрешения конфликтов
-Вот тут полезые рекомендации по набору патчей исходников, которые надо применить перед компиляцией.
+# РЎР±РѕСЂРєР° Рё РЅР°СЃС‚СЂРѕР№РєР° РґРѕРїРѕС‚РѕРїРЅРѕРіРѕ PHP 5.2.17 РІРјРµСЃС‚Рµ СЃ FPM РїРѕРґ Debian 8.x (Jessie)
 
-sudo apt-get install libxml2-dev libmysqlclient-dev libcurl4-gnutls-dev libpng12-dev libjpeg62-turbo-dev make libxslt1-dev libbz2-dev libmcrypt-dev libmhash-dev libfcgi-dev libmhash-dev libjpeg-dev checkinstall
-sudo apt-get install mysql-server
+Р”Р»СЏ СЃРѕСЃС‚Р°РІР»РµРЅРёСЏ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё РєРѕРјРјР°РЅРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РґСЂРµРІРµРЅРµР№ PHP 5.2.17 РїРѕРЅР°РґРѕР±РёР»СЃСЏ РїРµСЂРµСЂС‹С‚СЊ РјРЅРѕРіРѕ РјРёСЂРѕРІРѕРіРѕ РёРЅС‚РµСЂРЅРµС‚Р° Рё СЃРѕРІРµСЂС€РёС‚СЊ РјРЅРѕРіРѕ РѕС€РёР±РѕРє. Рљ СЃРѕР¶Р°Р»РµРЅРёСЋ Сѓ Р°РІС‚РѕСЂР° РЅРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ СЃРѕР±СЂР°С‚СЊ PHP 5.2.17 РґР»СЏ Debian 8.x В«JessieВ» x368 (32-Р±РёС‚РЅСѓСЋ). РќРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё СЃРѕРѕС‚РІРµС‚СЃРІСѓСЋС‰РёР№ РµР№ РїР°РєРµС‚ `libjpeg-dev` (`libjpeg` РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєРѕРІ). Р”Р»СЏ Debian 9 В«StretchВ» РЅРµС…РІР°С‚Р°Р»Рѕ РµС‰Рµ Р±РѕР»СЊС€РµРіРѕ С‡РёСЃР»Р° Р±РёР±Р»РёРѕС‚РµРє. Р•СЃР»Рё Сѓ РІР°СЃ РµСЃС‚СЊ СЂРµРєРѕРјРµРЅРґР°С†РёРё, РїРѕ СЃР±РѕСЂРєРµ РЅРµРѕР±С…РѕРґРёРјРѕРіРѕ СЃРѕСЃС‚Р°РІР° Р±РёР±Р»РёРѕС‚РєРµ РґР»СЏ СЌС‚РёС… СЃРёСЃС‚РµРј, РјРѕРµР¶РµС‚ РїСЂРёСЃС‹Р»Р°С‚СЊ РєРѕРјРјРёС‚С‹ РёР»Рё СЃРІСЏР¶РёС‚РµСЃСЊ РІ Р°РІС‚РѕСЂРѕРј.
+
+## РџРѕРґРіРѕС‚РѕРІРєР° СЃРёСЃС‚РµРјС‹ РґР»СЏ РєРѕРјРїРёР»СЏС†РёРё PHP 5.2.17 Рё FPM
+
+Р”Р»СЏ СЃР±РѕСЂРєРё  5.2.17 Рё FPM РёР· РёСЃС…РѕРґРЅРёРєРѕРІ РІ СЃРёСЃС‚РµРјС‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓСЃС‚Р°РЅРѕРІР»РµРЅС‹ СЂР°Р·СЂР°Р±РѕС‚С‡РµСЃРєРёРµ РІРµСЂСЃРёРё РЅРµРєРѕС‚РѕСЂС‹С… РїР°РєРµС‚РѕРІ Рё РєРѕРјРїРёР»СЏС‚РѕСЂ-СЃР±РѕСЂС‰РёРє:
+
+```bash
+sudo apt-get install libxml2-dev \              # РїРѕРґРґРµСЂР¶РєР° xml
+                     libmysqlclient-dev \
+                     libcurl4-gnutls-dev \
+                     libpng12-dev \
+                     libjpeg62-turbo-dev \
+                     libjpeg-dev \
+                     libxslt1-dev \
+                     libbz2-dev \
+                     libmcrypt-dev \
+                     libmhash-dev \
+                     libfcgi-dev \
+                     libmhash-dev \
+                     make checkinstall
+```
+
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so.62.0.0 /usr/lib/libjpeg.so
 sudo ln -s /lib/x86_64-linux-gnu/libpng12.so.0.50.0 /usr/lib/libpng.so
 sudo ln -s /usr/lib/x86_64-linux-gnu/libmysqlclient.so.18.0.0 /usr/lib/libmysqlclient.so
 
-или
+РёР»Рё
 sudo ln -s /usr/lib/i386-linux-gnu/libjpeg.so.62.0.0 /usr/lib/libjpeg.so
 sudo ln -s /lib/i386-linux-gnu/libpng12.so.0.50.0 /usr/lib/libpng.so
 sudo ln -s /usr/lib/i368-linux-gnu/libmysqlclient.so.18.0.0 /usr/lib/libmysqlclient.so
@@ -18,9 +36,9 @@ wget http://museum.php.net/php5/php-5.2.17.tar.gz
 wget https://github.com/TommyLau/docker-lnmpa/raw/master/php/5.2/php-5.2.17-libxml2.patch
 wget https://github.com/TommyLau/docker-lnmpa/raw/master/php/5.2/php-5.2.17-openssl.patch
 # PHP-FPM
-FastCGI Process Manager, "Менеджер процессов FastCGI". Это альтернативная реализация FastCGI режима в PHP с несколькими дополнительными возможностя-ми, которые обычно используются для высоконагруженных сайтов.
-Изначально PHP-FPM представлял из себя набор патчей от Андрея Нигматулина, которые устраняли ряд проблем, мешающих полноценно использовать PHP в режиме FastCGI (список улучшений). С версии PHP 5.3 набор патчей включён в ядро, а дополнительные возможности PHP-FPM включаются флагом при компиляции.
-PHP-FPM используется в основном в связке с Nginx, без установки Apache.
+FastCGI Process Manager, "РњРµРЅРµРґР¶РµСЂ РїСЂРѕС†РµСЃСЃРѕРІ FastCGI". Р­С‚Рѕ Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅР°СЏ СЂРµР°Р»РёР·Р°С†РёСЏ FastCGI СЂРµР¶РёРјР° РІ PHP СЃ РЅРµСЃРєРѕР»СЊРєРёРјРё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹РјРё РІРѕР·РјРѕР¶РЅРѕСЃС‚СЏ-РјРё, РєРѕС‚РѕСЂС‹Рµ РѕР±С‹С‡РЅРѕ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РґР»СЏ РІС‹СЃРѕРєРѕРЅР°РіСЂСѓР¶РµРЅРЅС‹С… СЃР°Р№С‚РѕРІ.
+РР·РЅР°С‡Р°Р»СЊРЅРѕ PHP-FPM РїСЂРµРґСЃС‚Р°РІР»СЏР» РёР· СЃРµР±СЏ РЅР°Р±РѕСЂ РїР°С‚С‡РµР№ РѕС‚ РђРЅРґСЂРµСЏ РќРёРіРјР°С‚СѓР»РёРЅР°, РєРѕС‚РѕСЂС‹Рµ СѓСЃС‚СЂР°РЅСЏР»Рё СЂСЏРґ РїСЂРѕР±Р»РµРј, РјРµС€Р°СЋС‰РёС… РїРѕР»РЅРѕС†РµРЅРЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ PHP РІ СЂРµР¶РёРјРµ FastCGI (СЃРїРёСЃРѕРє СѓР»СѓС‡С€РµРЅРёР№). РЎ РІРµСЂСЃРёРё PHP 5.3 РЅР°Р±РѕСЂ РїР°С‚С‡РµР№ РІРєР»СЋС‡С‘РЅ РІ СЏРґСЂРѕ, Р° РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё PHP-FPM РІРєР»СЋС‡Р°СЋС‚СЃСЏ С„Р»Р°РіРѕРј РїСЂРё РєРѕРјРїРёР»СЏС†РёРё.
+PHP-FPM РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ РѕСЃРЅРѕРІРЅРѕРј РІ СЃРІСЏР·РєРµ СЃ Nginx, Р±РµР· СѓСЃС‚Р°РЅРѕРІРєРё Apache.
 
 wget "http://php-fpm.org/downloads/php-5.2.17-fpm-0.5.14.diff.gz" -O php-fpm.diff.gz
 
@@ -45,6 +63,8 @@ sed -i 's/freetype2\/freetype/freetype/' configure
 
 ./configure  --prefix=/usr/local --with-config-file-path=/usr/local/etc --with-mcrypt --with-gettext --with-gd --with-jpeg-dir --with-png-dir --with-ttf --with-curl --enable-gd-native-ttf --enable-mbstring --enable-sockets --with-png-dir --with-pdo-mysql --with-zlib  --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --with-mysql=/usr/local/mysql --with-mysqli=/usr/bin/mysql_config
 
+
+С…РѕСЂРѕС€Р°СЏ (РЅРѕ СЃС‚Р°СЂР°СЏ) РёРЅСЃС‚СЂСѓРєС†РёСЏ СЂР°Р·СЂРµС€РµРЅРёСЏ РѕС€РёР±РѕРє РєРѕРјРїРёР»СЏС†РёРё http://denik.od.ua/rasprostranennye_oshibki_pri_kompilirovanii_php Р РµРєРѕРјРµРЅРґСѓРµРјС‹Рµ РґР»СЏ РёРЅСЃС‚Р°Р»СЏС†РёРё РїР°РєРµС‚С‹ РЅРµРјРЅРѕРіРѕ СѓСЃС‚Р°СЂРµР»Рё Рё РЅРµ РІСЃРµРіРґР° РґРѕСЃРїСѓРЅС‹, РЅРѕ РєР°Рє РјРёРЅРёРјСѓРј РјРѕР¶РµС‚ СЃР»СѓР¶РёС‚СЊ РїРѕРІРѕРґРѕРј В«РєСѓРґР° РєРѕРїР°С‚СЊВ» РґР»СЏ СЂР°Р·СЂРµС€РµРЅРёСЏ РєРѕРЅС„Р»РёРєС‚РѕРІ
 
 wget https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt
 patch -p0 -b < txtbgxGXAvz4N.txt
