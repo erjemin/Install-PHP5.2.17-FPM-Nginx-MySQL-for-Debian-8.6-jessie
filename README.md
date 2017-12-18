@@ -5,10 +5,10 @@
 Установку сервера состояла из следующих мероприятий:
 
 * Установка системы Debian (или аналога) и первичные настройки.
-* Настройка SSH.
-* Установка и настройка MySQL.
-* [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
+* Настройка SSH и сплеш-скрина.
+* [Установка и настройка MySQL](install-and-adjust-MySQL-fоr-php-5.2.17.md).
 * Установка и настройка веб-сервера nginx.
+* [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
 * Установка и настройка phpMyAdmin и немного настроек Joomla! 1.0.15.
 
 
@@ -27,12 +27,12 @@ mkdir -p $HOME/[адрес сайта]/config
 nano $HOME/[адрес сайта]/config intranet_old_nginx.conf
 
 ```Инструкция тут: http://help.ubuntu.ru/wiki/nginx-phpfpm
-#  __  __     __   ___       _                        _
-# |__)(_ \  //  \ /   \     | |                      | | OLD/СТАРЫЙ
-# | \ __) \/ \__/  | | _ __ | |_ _ __ __ _ _ __   ___| |_~~~~~~~~~~
-# V: 1.0           | || '_ \| __| '__/ _` | '_ \ / _ \ __|
-#                 _| || | | | |_| | | (_| | | | |  __/ |_
-#                 \___/_| |_|\__|_|  \__,_|_| |_|\___|\__|
+#   ___       _                        _
+#  /   \     | |                      | | OLD FOR PHP 5.2.17
+#   | | _ __ | |_ _ __ __ _ _ __   ___| |_~~~~~~~~~~~~~~~~~~
+#   | || '_ \| __| '__/ _` | '_ \ / _ \ __|
+#  _| || | | | |_| | | (_| | | | |  __/ |_
+#  \___/_| |_|\__|_|  \__,_|_| |_|\___|\__|
 # Назначение:   конфиг-файл nginx для сайта Intranet RSVO
 # Расположение: /home/e-serg/intranet-old/config/intranet_old_nginx.conf
 
@@ -101,52 +101,7 @@ server {
 
 sudo ln -s /home/e-serg/intranet-old/config/intranet_old_nginx.conf /etc/nginx/sites-enabled/
 
-sudo nano /usr/local/etc/php-fpm.conf
 
-      <value name="listen_address">/home/e-serg/intranet-old/socket/php-fpm.socket</value>
-      <!--    <value name="listen_address">127.0.0.1:9000</value>     -->
-
-
-                        Unix user of processes
-                        <value name="user">www-data</value>
-
-
-                        Unix group of processes
-                        <value name="group">www-data</value>
-
-
-<value name="error_log">/home/e-serg/intranet-old/logs/php-fpm.log</value>
-<value name="mode">0660</value>
-
-Запускаем fpm
-sudo /usr/local/sbin/php-fpm restart -y /usr/local/etc/php-fpm.conf
-
-Можно убедится в том, что права доступа к сокету установлены верно:
-
-ls -la /home/e-serg/intranet-old/socket/php-fpm.socket
-Права доступа должны быть «srw-rw—-», владелец «www-data» (группа «www-data» у меня root), например:
-
-srw-rw---- 1 root root 0 дек 13 17:12 /home/e-serg/intranet-old/socket/php-fpm.socket
-
-sudo service nginx restart
-
-nano $HOME/[адрес сайта]/html/info.php
-
-<?php
-phpinfo();
-?>
-
-Чтобы FPM запускался автоматически при каждой загрузке нашего Raspberri pi необходимо изменить файл /etc/rc.local. Открываем его на редактирование:
-
-sudo nano /etc/rc.local
-
-И перед самой последней строчкой exit 0 вставляем в него команду запуска FPM. Должно получиться примерно так:
-
-/usr/local/sbin/php-fpm start -y /usr/local/etc/php-fpm.conf
-exit 0
-Теперь можно перезагрузить наш сервер и убедиться, что FPM запустился и наш сайт [адрес_сайта] открывается в браузере.
-
-Sudo reboot
 
 mysql -u root -p secret_password_mysql_root
 
