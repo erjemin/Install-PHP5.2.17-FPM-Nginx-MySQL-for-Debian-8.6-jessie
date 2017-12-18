@@ -160,13 +160,16 @@ Zend Engine v2.2.0, Copyright (c) 1998-2010 Zend Technologies
 ```bash
 sudo nano /usr/local/etc/php-fpm.conf
 ```
-Далее находим и меняем в нем и меняем настройки `error_log` для хранения log-файлов работы FPM (не забываем менять значения для **[user]** и **[site]**:
+Далее находим и меняем в нем и меняем настройки `error_log` -- размещение log-файлов FPM (не забываем менять значения для **[user]** и **[site]**):
 ```xml
-<value name="error_log">/home/[user]/[site]/logs/php-fpm.log</value>
+    <value name="error_log">/home/[user]/[site]/logs/php-fpm.log</value>
+```
+Для `listen_address` указывает расположение сокета для обмена с данными с веи-сервером (можно использовать веб-сокет указанный по умолчанию `127.0.0.1:9000`, но unix-сокет производитльней):
+```xml
+    <value name="listen_address">/home/[user]/[site]/socket/php-fpm.socket</value>
+    <!--    <value name="listen_address">127.0.0.1:9000</value>     -->
 ```
 
-      <value name="listen_address">/home/e-serg/intranet-old/socket/php-fpm.socket</value>
-      <!--    <value name="listen_address">127.0.0.1:9000</value>     -->
 
 
                         Unix user of processes
