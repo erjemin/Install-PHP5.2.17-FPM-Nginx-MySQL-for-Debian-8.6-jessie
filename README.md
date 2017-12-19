@@ -9,7 +9,7 @@
 * [Установка и настройка MySQL](install-and-adjust-MySQL-fоr-php-5.2.17.md).
 * [Установка и настройка веб-сервера nginx](install-and-adjust-nginx-fоr-php-5.2.17.md).
 * [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
-* Установка и настройка phpMyAdmin и немного настроек Joomla! 1.0.15.
+* Настройка Joomla! 1.0.15 и настройка phpMyAdmin и немного
 
 
 
@@ -22,19 +22,7 @@ apt-get htop
 
 
 
-mysql -u root -p secret_password_mysql_root
 
-CREATE DATABASE intranet DEFAULT CHARACTER SET cp1251 DEFAULT COLLATE cp1251_general_ci;
-
-CREATE DATABASE phones2 DEFAULT CHARACTER SET latin1 DEFAULT COLLATE latin1_swedish_ci;
-
-Затем, чтобы наше Django-приложение не работало с базой под аккаунтом супер-пользователя root, создаем нового пользователя базы [user] с паролем «secret_password_mysql_user»:
-GRANT ALL PRIVILEGES ON intranet.* TO 'e-serg'@'localhost' IDENTIFIED BY 'qwaseR12';
-GRANT ALL PRIVILEGES ON phones2.* TO 'e-serg'@'localhost' IDENTIFIED BY 'qwaseR12';
-
-SHOW VARIABLES LIKE '%time_zone%';
-
-quit;
 
 
 
