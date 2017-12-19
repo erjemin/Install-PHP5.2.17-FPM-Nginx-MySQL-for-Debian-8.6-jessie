@@ -7,7 +7,7 @@
 * Установка системы Debian (или аналога) и первичные настройки.
 * Настройка SSH и сплеш-скрина.
 * [Установка и настройка MySQL](install-and-adjust-MySQL-fоr-php-5.2.17.md).
-* Установка и настройка веб-сервера nginx.
+* [Установка и настройка веб-сервера nginx](install-and-adjust-nginx-fоr-php-5.2.17.md).
 * [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
 * Установка и настройка phpMyAdmin и немного настроек Joomla! 1.0.15.
 
@@ -19,87 +19,6 @@ apt-get sudo
 настраиваем sudoers
 apt-get htop
 
---------
-apt-get install nginx
-unlink /etc/nginx/sites-enabled/default
-mkdir -p $HOME/[адрес сайта]/logs
-mkdir -p $HOME/[адрес сайта]/config
-nano $HOME/[адрес сайта]/config intranet_old_nginx.conf
-
-```Инструкция тут: http://help.ubuntu.ru/wiki/nginx-phpfpm
-#   ___       _                        _
-#  /   \     | |                      | | OLD FOR PHP 5.2.17
-#   | | _ __ | |_ _ __ __ _ _ __   ___| |_~~~~~~~~~~~~~~~~~~
-#   | || '_ \| __| '__/ _` | '_ \ / _ \ __|
-#  _| || | | | |_| | | (_| | | | |  __/ |_
-#  \___/_| |_|\__|_|  \__,_|_| |_|\___|\__|
-# Назначение:   конфиг-файл nginx для сайта Intranet RSVO
-# Расположение: /home/e-serg/intranet-old/config/intranet_old_nginx.conf
-
-# Описываем апстрим-потоки которые должен подключить Nginx
-# Для каждого сайта надо настроить свой поток, со своим уникальным именем.
-# Если будете настраивать несколько python (django) сайтов - измените название upstream
-
-upstream php-fpm {
-    # расположение Unix-сокета для взаимодействия с PHP5-FPM сервер
-    server unix:/home/e-serg/intranet-old/socket/php-fpm.socket;
-    # server unix:/var/run/php5-fpm.sock;
-    # также можно использовать веб-сокет и порт для взаимодействия, но это медленнее
-    # server 127.0.0.1:12012;
-}
-server {
-        listen 8080 default_server;
-        return 302 http://10.3.1.171$request_uri;
-}
-
-server {
-    listen *:80 default_server;
-    server_name default;
-
-    root       /home/e-serg/intranet-old/html;
-    access_log /home/e-serg/intranet-old/logs/access.log;
-    error_log  /home/e-serg/intranet-old/logs/error.log;
-
-    set $phpini "
-        error_log=/home/e-serg/intranet-old/logs/php-errors.log
-    ";
-
-    index index.php index.html index.htm;
-
-    location ~ ^(.*\.php)$ {
-
-        fastcgi_pass	php-fpm;       # upstream обрабатывающий обращений fastcgi
-        include		fastcgi_params;               # конфигурационный файл fastcgi;
-        fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
-        # Вместо переменной "$document_root" можно указать адрес к корневому каталогу сервера и это желательно (см. http://wiki.nginx.org/Pitfalls)
-        fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;
-        fastcgi_param	PATH_TRANSLATED		$document_root$fastcgi_script_name;
-        # См. http://trac.nginx.org/nginx/ticket/321
-        set		$path_info		$fastcgi_path_info;
-        fastcgi_param	PATH_INFO		$path_info;
-        # Additional variables
-        fastcgi_param	SERVER_ADMIN		email@example.com;
-        fastcgi_param	SERVER_SIGNATURE	nginx/$nginx_version;
-        fastcgi_index	index.php;
-        fastcgi_param	PHP_VALUE "$phpini";
-        fastcgi_param	SCRIPT_FILENAME $document_root$1;
-
-
-        # uwsgi_pass	php-fpm;       # upstream обрабатывающий обращений uwsgi
-        # include	uwsgi_params;               # конфигурационный файл uwsgi;
-        # uwsgi_read_timeout	1800;     # некоторые запросы на Raspbery pi очень долго обрабатываются.
-        # uwsgi_send_timeout	200;      # на всякий случай время записи в сокет
-
-    }
-    # Запрет доступа к .htaccess и .htpasswd файлам
-    location ~* "/\.(htaccess|htpasswd)$" {
-        deny all;               # запретить все для всех
-        return 404;             # вернуть код ошибки
-    }
-}```
-
-
-sudo ln -s /home/e-serg/intranet-old/config/intranet_old_nginx.conf /etc/nginx/sites-enabled/
 
 
 
