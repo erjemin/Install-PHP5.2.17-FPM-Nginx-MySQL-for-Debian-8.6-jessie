@@ -128,7 +128,15 @@ $mosConfig_password = 'qwaseR12';
 $mosConfig_user = 'e-serg';
 
 
-
+время
 sudo apt-get install ntp
 
+конверер
+sudo apt-get install alien
 
+модуль
+wget ftp://ftp.pbone.net/mirror/yum.jasonlitka.com/EL5/x86_64/php-ldap-5.2.17-jason.2.x86_64.rpm
+
+sudo alien --to-deb php-ldap-5.2.17-jason.2.x86_64.rpm
+
+sudo dpkg -i php-ldap_5.2.17-1_amd64.deb
