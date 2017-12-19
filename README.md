@@ -53,9 +53,11 @@ sudo apt-get install ntp
 конверер
 sudo apt-get install alien
 
-модуль
+модуль найти
+http://www.rpm-find.net/linux/rpm2html/search.php?query=php-ldap
+скачать
 wget ftp://ftp.pbone.net/mirror/yum.jasonlitka.com/EL5/x86_64/php-ldap-5.2.17-jason.2.x86_64.rpm
-
+конвертнуть
 sudo alien --to-deb php-ldap-5.2.17-jason.2.x86_64.rpm
-
+некатить
 sudo dpkg -i php-ldap_5.2.17-1_amd64.deb

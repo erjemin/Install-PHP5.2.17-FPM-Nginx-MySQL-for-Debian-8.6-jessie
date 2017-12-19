@@ -30,7 +30,7 @@ sudo rm -rf /etc/apache2
 
 ## Установка и настройка веб-сервера nginx
 
-Нас вполне удовлетворит версия nginx «прилитающая» из репозитория нашей операционной системы (Debian, Ubuntu, Raspbian, Noobs и т.д.). Это удобно и не требует лиших телодвижений при обновлений системы. Но возможно, по причиам лучшей производительности, нам потребуется более свежая версия nginx и тогда надо подключить собственые репозиториев nginx. Подключить репозиторий и обновить nginx можно в любой момент (см. <Обновление версии nginx> в конце этой главы), но мы можно сдлеать и сразу.
+Нас вполне удовлетворит версия nginx «прилитающая» из репозитория нашей операционной системы (Debian, Ubuntu, Raspbian, Noobs и т.д.). Это удобно и не требует лиших телодвижений при обновлений системы. Но возможно, по причиам лучшей производительности, нам потребуется более свежая версия nginx и тогда надо подключить собственые репозиториев nginx. Подключить репозиторий и обновить nginx можно в любой момент (см. раздел **«Обновление версии nginx»** в конце этой главы), но мы можно сдлеать и сразу.
 
 ### Подключение репозиториев nginx
 
@@ -91,163 +91,63 @@ sudo nginx -v
 Получим сообщение:
 > nginx version: nginx/1.12.2
 
+## Настройка nginx для нашего проекта
 
-
-
-
-
-### Настройка nginx для нашего проекта
-
-Теперь надо настроить наш сайта в nginx. Создаем каталоги для хранения логов, конфигурационных файлов и сокета.
+Теперь надо настроить наш сайта (он же сайт по умолчанию) в nginx. Создаем каталоги для хранения логов, конфигурационных файлов и сокета (не забываем менять значения для **[user]** в путях к файлам).
 ```bash
-mkdir -p $HOME/[адрес сайта]/logs
-mkdir -p $HOME/[адрес сайта]/conf
-mkdir -p $HOME/[адрес сайта]/sock
+mkdir -p $HOME/[site]/logs
+mkdir -p $HOME/[site]/config
+mkdir -p $HOME/[site]/socket
+mkdir -p $HOME/[site]/html
 ```
-
-Создаём конфигурационный файл `[адрес_сайта]_nginx.conf`:
+Создаём конфигурационный файл `[site]_nginx.conf`:
 ```bash
-nano $HOME/[адрес сайта]/conf/[адрес_сайта]_nginx.conf
+nano $HOME/[site]/config/[site]_nginx.conf
 ```
-Со следующим содержанием:
+Со следующим содержанием (не забываем менять значения для **[user]** и **[site]** в путях к файлам и **[ip-нашего-сервера]** в адресах):
 ```
-#       ___  ___   ___    ___  __  __  ____  ____  ___     ____  __  __
-#      / __)(__ \ / __)  / __)(  )(  )(  _ \( ___)(__ \   (  _ \(  )(  )
-#     ( (__  / _/( (_-. ( (__  )(__)(  ) _ < )__)  / _/    )   / )(__)(
-#      \___)(____)\___/()\___)(______)(____/(____)(____)()(_)\_)(______)
-# Конфикурационный файл nginx для сайта [адрес сайта] ([адрес_сайта]_nginx.conf)
-
-# не забываем изменять _user_ на имя нашего пользователя, которому будет разрешено деплоить и перезапускать сайт.
-
-# Описываем апстрим-потоки которые должен подключить Nginx
-# Для каждого сайта надо настроить свйо поток, со своим уникальным именем.
-# Если будете настраивать несколько python (django) сайтов - измените название upstream
-
-upstream [адрес_сайта]_django {
-    # расположение файла Unix-сокет для взаимодействие с uwsgi
-    server unix:///home/[user]/[адрес сайта]/sock/[адрес_сайта].sock;
-    # также можно использовать веб-сокет (порт) для взаимодействие с uwsgi. Но это медленнее
-    # server 127.0.0.1:8001; # для взаимодействия с uwsgi через веб-порт
-}
-
-# конфигурируем сервер
-server {
-    listen      80;                  # порт на котором будет доступен наш сайт
-    server_name [адрес сайта];       # доменное имя сайта
-    charset     utf-8;               # подировка по умолчанию
-    access_log  /home/[user]/[адрес сайта]/logs/[адрес_сайта]_access.log;    # логи с доступом
-    error_log   /home/[user]/[адрес сайта]/logs/[адрес_сайта]_error.log;     # логи с ошибками
-    client_max_body_size 32M; # максимальный объем файла для загрузки на сайт (max upload size)
-
-    location /media       { alias /home/[user]/[адрес сайта]/classifier-manager/media; }   # Расположение media-файлов Django
-    location /static      { alias /home/[user]/[адрес сайта]/classifier-manager/static; }  # Расположение static-файлов Django
-    location /robots.txt  { root /home/[user]/[адрес сайта]/classifier-manager/static; }   # Расположение robots.txt
-    location /favicon.ico { root /home/[user]/[адрес сайта]/classifier-manager/static; }   # Расположение favicon.ico
-    location / {
-        uwsgi_pass           [адрес_сайта]_django;       # upstream обрабатывающий обращений
-        include              uwsgi_params;               # конфигурационный файл uwsgi;
-        uwsgi_read_timeout   1800;     # некоторые запросы на Raspbery pi очень долго обрабатываются. Например, переиндексация.
-        uwsgi_send_timeout   200;      # на всякий случай время записи в сокет
-        }
-
-    }
-```
-Проверьте все скобочки и точки с запятой... Они могут создать много неприятностей. Сохраняем файл `Ctrl+O` и `Enter`, а затем выходим из редактора nano с помощью `Ctrl+X`.
-
-Эта конфигурация сообщает nginx, каким образом он отдает данные при обращении к **[адрес сайта]** по порту **80**. Так, при обащении статическим и загруженным пользователем файлам, он отдает их из соответсвующих каталогов, а остальные  запросы будут перенаправлятся в Django-приложение через апстрим `[адрес_сайта]_django`, который работает через юникосвкий файл-сокет `unix:///home/[user]/[адрес сайта]/sock/[адрес_сайта].sock`.
-
-По умолчанию файл конфигурации uWSGI нажодится в папке _/etc/nginx/uwsgi_params_ и мы спользуем именно его, но при желании мы может переопределить eго. К слову сказать, в ранних версиях nginx файл _uwsgi_params_ в поставку не входил. Проверьте есть ли он у вас, и при необходимости [загрузите из git-репозитория разработчиков nginx](https://github.com/nginx/nginx/blob/master/conf/uwsgi_params).
-
-Чтобы nginx подключил наш новый файл конфигурации сайта нужно добавьте ссылку на него в каталог `/etc/nginx/sites-enabled/`:
-```bash
-sudo ln -s $HOME/[адрес сайта]/conf/[адрес_сайта]_nginx.conf /etc/nginx/sites-enabled/
-```
-
-Теперь нужно перезагрузить nginx
-```bash
-sudo service nginx restart
-```
-
-В результате статические файлы теперь будут отдаваться в браузер. Так вызвав `http://[адрес сайта]/static/img/cubex.png` получим картинку:
-
-![Что показываю по http://[адрес сайта]/static/img/cubex.png](https://raw.githubusercontent.com/erjemin/classifier-manager/master/static/img/cubex.png "cubex.png")
-
-nginx работает. То что все в нем корректно проверяем командой: `systemctl status nginx.service`
-
-```
-● nginx.service - A high performance web server and a reverse proxy server
-   Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
-   Active: active (running) since Чт 2016-10-27 19:41:19 MSK; 4min 27s ago
-  Process: 20175 ExecStop=/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid (code=exited, status=0/SUCCESS)
-  Process: 20187 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-  Process: 20182 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
- Main PID: 20190 (nginx)
-   Memory: 2.3M
-      CPU: 265ms
-      CGroup: /system.slice/nginx.service
-           ├─20190 nginx: master process /usr/sbin/nginx -g daemon on; master_process on
-           ├─20191 nginx: worker process
-           ├─20192 nginx: worker process
-           ├─20193 nginx: worker process
-           └─20194 nginx: worker process
-```
-
-
-
-
-
-
-
-
-unlink /etc/nginx/sites-enabled/default
-mkdir -p $HOME/[адрес сайта]/logs
-mkdir -p $HOME/[адрес сайта]/config
-nano $HOME/[адрес сайта]/config intranet_old_nginx.conf
-
-```Инструкция тут: http://help.ubuntu.ru/wiki/nginx-phpfpm
 #   ___       _                        _
 #  /   \     | |                      | | OLD FOR PHP 5.2.17
 #   | | _ __ | |_ _ __ __ _ _ __   ___| |_~~~~~~~~~~~~~~~~~~
 #   | || '_ \| __| '__/ _` | '_ \ / _ \ __|
 #  _| || | | | |_| | | (_| | | | |  __/ |_
 #  \___/_| |_|\__|_|  \__,_|_| |_|\___|\__|
-# Назначение:   конфиг-файл nginx для сайта Intranet RSVO
-# Расположение: /home/e-serg/intranet-old/config/intranet_old_nginx.conf
+# Назначение:   конфиг-файл nginx для сайта под PHP 5.2.17 через FPM
+# Расположение: /home/[user]/[site]/config/[site]_nginx.conf
 
-# Описываем апстрим-потоки которые должен подключить Nginx
+# Описываем апстрим-потоки которые должен подключить nginx
 # Для каждого сайта надо настроить свой поток, со своим уникальным именем.
-# Если будете настраивать несколько python (django) сайтов - измените название upstream
 
 upstream php-fpm {
-    # расположение Unix-сокета для взаимодействия с PHP5-FPM сервер
+    # расположение Unix-сокета для взаимодействия с PHP5 через FPM
     server unix:/home/e-serg/intranet-old/socket/php-fpm.socket;
-    # server unix:/var/run/php5-fpm.sock;
     # также можно использовать веб-сокет и порт для взаимодействия, но это медленнее
     # server 127.0.0.1:12012;
 }
+# если нужно ловить http по другим портам, то делаем так:
 server {
-        listen 8080 default_server;
-        return 302 http://10.3.1.171$request_uri;
+        listen 8080 default_server;                 # слушает 8080 порт
+        return 302 http://[ip-нашего-сервера]$request_uri;   # и редиектим все
 }
 
 server {
-    listen *:80 default_server;
+    listen *:80 default_server;                     # слушаем 80
     server_name default;
 
-    root       /home/e-serg/intranet-old/html;
-    access_log /home/e-serg/intranet-old/logs/access.log;
-    error_log  /home/e-serg/intranet-old/logs/error.log;
+    root       /home/[user]/[site]/html;            # папка для php-сайта
+    access_log /home/[user]/[site]/logs/access.log; # хранение access-логов
+    error_log  /home/[user]/[site]/logs/error.log;  # хранение error-логов
 
     set $phpini "
-        error_log=/home/e-serg/intranet-old/logs/php-errors.log
+        error_log=/home/[user]/[site]/logs/php-errors.log # установки для phpini
     ";
 
-    index index.php index.html index.htm;
+    index index.php index.html index.htm;           # файлы которые web-сервер считает как индексные
 
-    location ~ ^(.*\.php)$ {
+    location ~ ^(.*\.php)$ {                        # обработчик файлов с расширение .php
 
-        fastcgi_pass	php-fpm;       # upstream обрабатывающий обращений fastcgi
-        include		fastcgi_params;               # конфигурационный файл fastcgi;
+    fastcgi_pass    php-fpm;                        # upstream обрабатывающий обращений FPM (fastcgi)
+        include         fastcgi_params;             # конфигурационный файл fastcgi;
         fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
         # Вместо переменной "$document_root" можно указать адрес к корневому каталогу сервера и это желательно (см. http://wiki.nginx.org/Pitfalls)
         fastcgi_param	SCRIPT_FILENAME		$document_root$fastcgi_script_name;
@@ -261,27 +161,47 @@ server {
         fastcgi_index	index.php;
         fastcgi_param	PHP_VALUE "$phpini";
         fastcgi_param	SCRIPT_FILENAME $document_root$1;
-
-
-        # uwsgi_pass	php-fpm;       # upstream обрабатывающий обращений uwsgi
-        # include	uwsgi_params;               # конфигурационный файл uwsgi;
-        # uwsgi_read_timeout	1800;     # некоторые запросы на Raspbery pi очень долго обрабатываются.
-        # uwsgi_send_timeout	200;      # на всякий случай время записи в сокет
-
     }
     # Запрет доступа к .htaccess и .htpasswd файлам
     location ~* "/\.(htaccess|htpasswd)$" {
-        deny all;               # запретить все для всех
-        return 404;             # вернуть код ошибки
+        deny all;               # запретить всё для всех
+        return 404;             # и вернуть код ошибки
     }
-}```
+}
+```
+Проверьте все скобочки и точки с запятой... Они могут создать много неприятностей. Сохраняем файл `Ctrl+O` и `Enter`, а затем выходим из редактора nano с помощью `Ctrl+X`.
+
+Эта конфигурация сообщает nginx, каким образом он отдает данные при обращении к **[адрес сайта]** по портам **8080** и **80**. Так, при обращении статическим и загруженным пользователем файлам, он отдает их из соответсвующих каталогов, а остальные запросы будут перенаправлятся через апстрим `php-fpm` в FPM который запустит PHP на исполнение и вернёт результат назад через апстрим, который работает через юникосвкий файл-сокет `unix:///home/[user]/[site]/socket/[site].sock`.
+
+Чтобы nginx подключил наш новый файл конфигурации сайта нужно добавьте ссылку на него в каталог `/etc/nginx/sites-enabled/`: и удалить дефолтный из базовой найтройки (нужны права администратора):
+```bash
+sudo unlink /etc/nginx/sites-enabled/default
+sudo ln -s $HOME/[user]/conf/[site]_nginx.conf /etc/nginx/sites-enabled/
+```
+
+Теперь нужно перезагрузить nginx
+```bash
+sudo service nginx restart
+```
+В результате статические файлы теперь будут отдаваться в браузер напрямую, а все php-скрипты через апстрим-сокеты перенаправляются в PHP.
+
+nginx работает. То что все в нем корректно проверяем командой: `systemctl status nginx.service`
+
+```
+● nginx.service - nginx - high performance web server
+   Loaded: loaded (/lib/systemd/system/nginx.service; enabled)
+   Active: active (running) since Вт 2017-12-19 00:24:04 MSK; 2h 2min ago
+     Docs: http://nginx.org/en/docs/
+  Process: 22158 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+  Process: 22156 ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+ Main PID: 22160 (nginx)
+   CGroup: /system.slice/nginx.service
+           ├─22160 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+           └─22161 nginx: worker process
+```
 
 
-sudo ln -s /home/e-serg/intranet-old/config/intranet_old_nginx.conf /etc/nginx/sites-enabled/
-
-
-
-
+------------------------
 
 
 # Сборка nginx из исходников
@@ -333,21 +253,48 @@ sudo bash conf.sh
 sudo make
 sudo make install
 ```
-Если же полсле `make` ругается на недостаток каких-то модулей в Linux, то придется разобраться и доустановить необходимое. Но долно пройти все гладко. Свежесобранный nginx установлен. Нужно проверить, что веб-сервер запускается:
+Если же полсле `make` ругается на недостаток каких-то модулей в Linux, то придется разобраться и доустановить необходимое. Но долно пройти все гладко. Свежесобранный nginx установлен. Нужно проверить, что веб-сервер запускается (нужны права администратора):
 ```bash
 sudo service nginx start
 ```
-
 Убедиться что nginx работает корректно можно набрав: ***_http://[ip_нашего_серера]_***. Должна отображаться страница: **`Welcome to nginx on Debian!`**
+
+Унать какая версия установлена можно набрав команду (нужны права администратора):
+```bash
+sudo nginx -v
+```
+Получим сообщение:
+> nginx version: nginx/1.12.2
 
 Место на компьютере не резиновое, и теперь можем благополучно удалить папку в которой происходила сборка nginx и архив с исходниками:
 ```bash
-rm -R $HOME/nginx-1.10.1
-rm $HOME/nginx-1.10.1.tar.gz
+rm -R $HOME/nginx-1.12.2
+rm $HOME/nginx-1.12.2.tar.gz
 ```
 
 # Обновление версии nginx
 
+Для обновления версии всех пакетов достатончо дать комманду (нужны права администратора):
+ ```bash
+ sudo apt-get update
+ ```
+Чтобы получить самые последние версии nginx из родных nginx-репозиториев, нужно сначала одновить свой список репоизиториев (см. раздел «**Подключение репозиториев nginx**» в начале этой главы). удалить старую версию nginx (нужны права администратора):
+```bash
+sudo apt-get remove nginx-full nginx-common nginx
+```
+А затем установить nginx заново (опять нужны права администратора):
+```
+sudo apt-get install nginx
+```
+Проверяем, что веб-сервер запускается (нужны права администратора):
+```bash
+sudo service nginx start
+```
+Убедиться что nginx работает корректно можно набрав: ***_http://[ip_нашего_серера]_***. Должна отображаться страница: **`Welcome to nginx on Debian!`**
 
-apt-get remove nginx-full nginx-common nginx
-apt-get install nginx
+ Унать какая версия установлена можно набрав команду (нужны права администратора):
+```bash
+sudo nginx -v
+```
+Получим сообщение:
+> nginx version: nginx/1.12.2
