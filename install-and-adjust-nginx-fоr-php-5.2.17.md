@@ -176,7 +176,7 @@ server {
 Чтобы nginx подключил наш новый файл конфигурации сайта нужно добавьте ссылку на него в каталог `/etc/nginx/sites-enabled/`: и удалить дефолтный из базовой настройки (нужны права администратора):
 ```bash
 sudo unlink /etc/nginx/sites-enabled/default
-sudo ln -s $HOME/[user]/conf/[site]_nginx.conf /etc/nginx/sites-enabled/
+sudo ln -s $HOME/[site]/conf/[site]_nginx.conf /etc/nginx/sites-enabled/
 ```
 
 Теперь нужно перезагрузить nginx
@@ -210,11 +210,11 @@ nginx работает. То что всё в нём корректно пров
 
 Если очень хочется (например, для работы с бета-версиями), то можно поверх уже установленной версии <накатить> версию из исходников. Сначала устанавливаем пакеты, необходимые для сборки nginx из исходников -- компилятор С++ и библиотеки (нужны права администратора):
 ```bash
-sudo apt-get install gcc
-sudo apt-get install build-essential
-sudo apt-get install libpcre3-dev
-sudo apt-get install libcurl4-openssl-dev
-sudo apt-get install libexpat1-dev
+sudo apt-get install gcc build-essential libpcre3-dev libcurl4-openssl-dev libexpat1-dev
+
+sudo apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
+
+sudo apt-get install libpcre3-dev git
 ```
 
 Смотрим [на сайте nginx](http://nginx.org/ru/download.html) акутальную стабильную версию, скачиваем её в домашнюю директорию и расспаковываем исходники. Переходим в папку, в которую всё распаковалось. В ней будем собирать пакет. Например:
@@ -224,6 +224,8 @@ wget http://nginx.org/download/nginx-1.12.2.tar.gz
 tar -zxvf nginx-1.12.2.tar.gz
 cd nginx-1.12.2
 ```
+
+cd ~ && git clone https://github.com/kvspb/nginx-auth-ldap.git
 
 В редакторе `nano conf.sh` создаём командный файл:
 ```bash
@@ -240,10 +242,11 @@ cd nginx-1.12.2
             --with-http_flv_module \
             --with-http_dav_module \
             --with-http_secure_link_module \
+            --add-module=/home/[user]/nginx-auth-ldap
 ```
 Сохраняем файл `Ctrl+O` и `Enter`, а выходим из редактора `Ctrl+X`.
 
-В этот же файл можно добавить дополнительные модули, если мы хотим сборку с ними. Например, модуль поддержки WebDAV `--add-module=/root/nginx/nginx-webdav-ext/` (естественно, каждый такой модкль перед сборкой тоже надо скачать и разархивировать). Но нам никакие дополнительные модули не нужны.
+В этот же файл можно добавить дополнительные модули, если мы хотим сборку с ними. Например, модуль поддержки WebDAV `--add-module=/root/nginx/nginx-webdav-ext/` (естественно, каждый такой модкль перед сборкой тоже надо скачать и разархивировать v ). Но нам никакие дополнительные модули не нужны.
 
 Для того чтобы командный `conf.sh` файл  можно было запустить, устанавливаем соответствующие права, а за тем запускаем его (нужны права администратора):
 ```bash
