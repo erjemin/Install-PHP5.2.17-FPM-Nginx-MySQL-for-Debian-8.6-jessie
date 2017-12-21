@@ -247,9 +247,9 @@ sudo reboot
 
 #### *Примечание 2:*
 *Для Debian (Ubuntu и т.п.) можно (или нужно **дополнительно**) установить модуль php-ldap. Для нашей старой PHP 5.2.17 этот  модуль из репозиториев недоступен. Найти его тоже не получилось. Нашлись [php-ldap модули для CentOS](http://www.rpm-find.net/linux/rpm2html/search.php?query=php-ldap). Их можно конвертировать в модули для Debian. Сначала нужно установить конвертер (нужны права администратора):*
-*```bash
+```bash
 sudo apt-get install alien
-```*
+```
 *Скачиваем нужный для нашей операционной системы и версии PHP модуль (ищем URL на странице по ссылке выше):*
 ```bash
 wget ftp://ftp.pbone.net/mirror/yum.jasonlitka.com/EL5/x86_64/php-ldap-5.2.17-jason.2.x86_64.rpm
