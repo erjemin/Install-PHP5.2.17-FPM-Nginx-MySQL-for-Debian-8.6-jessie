@@ -1,2 +1,6 @@
-# Добавляем поддрежку Active Directory через LDAP для Debian, nginx и PHP 5.2.17
+# Р”РѕР±Р°РІР»СЏРµРј РїРѕРґРґСЂРµР¶РєСѓ Active Directory С‡РµСЂРµР· LDAP РґР»СЏ Debian, nginx Рё PHP 5.2.17
+
+
+
+## Р”РѕР±Р°РІР»СЏРµРј РїРѕРґРґРµСЂР¶РєСѓ LDAP РІ nginx
 
