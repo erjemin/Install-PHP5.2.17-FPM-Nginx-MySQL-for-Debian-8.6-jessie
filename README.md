@@ -10,7 +10,7 @@
 * [Установка и настройка веб-сервера nginx](install-and-adjust-nginx-fоr-php-5.2.17.md).
 * [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
 * Настройка Joomla! 1.0.15 и настройка phpMyAdmin и немного
-* Доустанавливаем поддержку LDAP (доступ к Active Directory)
+* [Доустанавливаем поддержку LDAP](adding-ldap-to-debian-nginx-and-php.md) (доступ к Active Directory)
 
 
 
