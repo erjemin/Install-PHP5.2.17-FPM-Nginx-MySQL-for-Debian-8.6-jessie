@@ -51,18 +51,91 @@ git clone https://github.com/kvspb/nginx-auth-ldap.git
 ```bash
 cd nginx-1.12.2
 ```
-Чтобы добавить динамические модули к текущей установке nginx, нам потребуется узнать — с какими параметрами он был собран. Если собирать с параметрами, в которых будут только новые модули, nginx будет ругаться и не позволит использовать такой модуль.
+Для сборки нам понядобится комптлятор С++ (`gcc`) и много модулей разработки (возможно есть и лишние, но так как модули и библиотеки тянут за собой много зависимый, выяснить, что действительно нужно, а что лишнее -- не получилось). Установим их  (нужны права администратора):
+```bash
+sudo apt-get install gcc build-essential libcurl4-openssl-dev libexpat1-dev libsasl2-dev python-dev libldap2-dev libssl-dev libpcre3-dev
+```
+Для добаления динамических модулей к текущей установке nginx, нам требуется знать — с какими параметрами он был собран. Если собирать с параметрами, в которых указать только новые модули, nginx не позволит использовать такой модуль.
+
 Для того, чтобы узнать, с какими параметрами был установлен nginx (в том числе, из репозитория), нужно набрать команду (нужны права администратора):
 ```bash
 sudo nginx -V
 ```
-Она сообщит, все ключи, которые были испольованы при сборке (не только для собранных в ручную версий, но и для версии <<прилетающей>> в систему из репозиториев. Сообщение выглядит примерно так:
->
-``` nginx version: nginx/1.12.2
-built by gcc 4.9.2 (Debian 4.9.2-10)
-built with OpenSSL 1.0.1t  3 May 2016
-
-> TLS SNI support enabled`
-
+Она сообщит, все параметры, которые были испольованы при сборке (не только для собранных в ручную версий, но и для версии <<прилетающей>> в систему из репозиториев. Сообщение выглядит примерно так:
 > configure arguments: --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'
 ```
+Нам нужно к этим параметрам добавить ключи, собирающие нужные нам модули. В нашем услучае один модуль поддержки LDAP, и в этом ключе нужно указать где находятся исходные файлы для сборки модуля. Команда будет выгляеть приветно так (не забываем менять значения для **[user]** указывая путь к исходникам в последней строчке):
+```bash
+./configure \
+    --prefix=/etc/nginx \
+    --sbin-path=/usr/sbin/nginx \
+    --modules-path=/usr/lib/nginx/modules \
+    --conf-path=/etc/nginx/nginx.conf \
+    --error-log-path=/var/log/nginx/error.log \
+    --http-log-path=/var/log/nginx/access.log \
+    --pid-path=/var/run/nginx.pid \
+    --lock-path=/var/run/nginx.lock \
+    --http-client-body-temp-path=/var/cache/nginx/client_temp \
+    --http-proxy-temp-path=/var/cache/nginx/proxy_temp \
+    --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
+    --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
+    --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
+    --user=nginx \
+    --group=nginx \
+    --with-compat \
+    --with-file-aio \
+    --with-threads \
+    --with-http_addition_module \
+    --with-http_auth_request_module \
+    --with-http_dav_module \
+    --with-http_flv_module \
+    --with-http_gunzip_module \
+    --with-http_gzip_static_module \
+    --with-http_mp4_module \
+    --with-http_random_index_module \
+    --with-http_realip_module \
+    --with-http_secure_link_module \
+    --with-http_slice_module \
+    --with-http_ssl_module \
+    --with-http_stub_status_module \
+    --with-http_sub_module \
+    --with-http_v2_module \
+    --with-mail \
+    --with-mail_ssl_module \
+    --with-stream \
+    --with-stream_realip_module \
+    --with-stream_ssl_module \
+    --with-stream_ssl_preread_module \
+    --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
+    --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
+    --add-dynamic-module=/home/[user]/nginx-auth-ldap
+ ```
+Остается собрат:
+```bash
+make modules
+```
+И установить (или обновить если таковые были) модули nginx (нужны права администратора):
+```bash
+sudo make install
+```
+В конце, устаноdobr сообщит месторасположение файлов nginx. В частности, самого динамического модуля для поддежки LDAP `/usr/lib/nginx/modules/ngx_http_auth_ldap_module.so` и глобального конфигурационного файла nginx `/etc/nginx/nginx.conf`. Отредактируем последний чтобы задействовать собранный и уситановленный модуль. Для этого откроем для редактирования глобальный конфиг nginx (нужны права администратора):
+```bash
+nano /etc/nginx/nginx.conf
+```
+И вставим вначале следующие строки:
+```
+load_module         modules/ngx_http_auth_ldap_module.so;
+```
+Обращаем внимание на значения `user` -- пользователь от имени которого будет работать web-сервер (**запомним его -- *[nginx-user]*** и `worker_processes`  -- число обработчиков процессов nginx (должно совпадать с числом процессорных ядер нашего компьютера). Кроме того, можно сразу за строкой `include /etc/nginx/conf.d/*.conf;`, указывающей подключаемую папку с насстройками наших сайтов, добавить `include /etc/nginx/sites-enabled/*;`, указывающую подключить еще одну папку с конфигами.
+
+Настройки закончены. Сохраняем файл `Ctrl+O` и `Enter`, а затем выходим из редактора `Ctrl+X`.
+
+Теперь создадим эту новую папку с конфигами (нужны права администратора):
+```bash
+sudo mkdir -p /etc/nginx/sites-enabled/
+```
+Готово! Нам остается перезагрузить веб-сервер (нужны права администратора):
+```bash
+service nginx reload
+```
+И убедиться, что nginx работает корректно, набрав: ***_http://[ip_нашего_серера]_***. Должна отображаться страница: **`Welcome to nginx on Debian!`**

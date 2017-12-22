@@ -211,12 +211,7 @@ nginx работает. То что всё в нём корректно пров
 
 Если очень хочется (например, для работы с бета-версиями), то можно поверх уже установленной версии <накатить> версию из исходников. Сначала устанавливаем пакеты, необходимые для сборки nginx из исходников -- компилятор С++ и библиотеки (нужны права администратора):
 ```bash
-sudo apt-get install gcc build-essential libpcre3-dev libcurl4-openssl-dev libexpat1-dev
-
-sudo apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
-sudo  apt-get install libldap2-dev
-
-sudo apt-get install libpcre3-dev git
+sudo apt-get install gcc build-essential libcurl4-openssl-dev libexpat1-dev libsasl2-dev python-dev libldap2-dev libssl-dev libpcre3-dev
 ```
 
 Смотрим [на сайте nginx](http://nginx.org/ru/download.html) акутальную стабильную версию, скачиваем её в домашнюю директорию и расспаковываем исходники. Переходим в папку, в которую всё распаковалось. В ней будем собирать пакет. Например:
