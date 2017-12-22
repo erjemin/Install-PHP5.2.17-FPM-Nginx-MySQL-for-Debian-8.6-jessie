@@ -1,6 +1,6 @@
 # Установка системы Debian (или аналога) и первичные настройки
 
-![Получаем наш IP с помощью команды ip addr](https://raw.githubusercontent.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/img/Z-get-ip.png "ip addr")
+![Получаем наш IP с помощью команды ip addr](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-get-ip.png?raw=true "ip addr")
 
 ## Устанавливаем sudo
 
@@ -20,7 +20,7 @@ nano /etc/sudoers
 ```
 Настройки закончены. Сохраняем файл `Ctrl+O` и `Enter`, а затем выходим из редактора nano `Ctrl+X`.
 
-Мы все еще работаем из-под `rootё'. Перезагружаем машину, чтобы настройки вступили в силу:
+Мы все еще работаем из-под `root'. Перезагружаем машину, чтобы настройки вступили в силу:
 ```bash
 reboot
 ```
