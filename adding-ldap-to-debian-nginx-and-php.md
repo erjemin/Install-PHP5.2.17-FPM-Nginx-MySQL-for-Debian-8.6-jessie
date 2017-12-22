@@ -57,9 +57,10 @@ cd nginx-1.12.2
 sudo nginx -V
 ```
 Она сообщит, все ключи, которые были испольованы при сборке (не только для собранных в ручную версий, но и для версии <<прилетающей>> в систему из репозиториев. Сообщение выглядит примерно так:
-> ```nginx version: nginx/1.12.2
-> ```built by gcc 4.9.2 (Debian 4.9.2-10)
-> ```built with OpenSSL 1.0.1t  3 May 2016
+> ```
+nginx version: nginx/1.12.2
+built by gcc 4.9.2 (Debian 4.9.2-10)
+built with OpenSSL 1.0.1t  3 May 2016
 
 > ```TLS SNI support enabled`
 
