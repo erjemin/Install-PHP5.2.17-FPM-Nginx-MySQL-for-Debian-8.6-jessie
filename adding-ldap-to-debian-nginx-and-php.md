@@ -53,7 +53,15 @@ cd nginx-1.12.2
 ```
 Для сборки нам понядобится комптлятор С++ (`gcc`) и много модулей разработки (возможно есть и лишние, но так как модули и библиотеки тянут за собой много зависимый, выяснить, что действительно нужно, а что лишнее -- не получилось). Установим их  (нужны права администратора):
 ```bash
-sudo apt-get install gcc build-essential libcurl4-openssl-dev libexpat1-dev libsasl2-dev python-dev libldap2-dev libssl-dev libpcre3-dev
+sudo apt-get install gcc \
+                     build-essential \
+                     libcurl4-openssl-dev \
+                     libexpat1-dev \
+                     libsasl2-dev \
+                     python-dev \
+                     libldap2-dev \
+                     libssl-dev \
+                     libpcre3-dev
 ```
 Для добаления динамических модулей к текущей установке nginx, нам требуется знать — с какими параметрами он был собран. Если собирать с параметрами, в которых указать только новые модули, nginx не позволит использовать такой модуль.
 
