@@ -121,7 +121,7 @@ nano $HOME/[site]/config/[site]_nginx.conf
 
 upstream php-fpm {
     # расположение Unix-сокета для взаимодействия с PHP5 через FPM
-    server unix:/home/e-serg/intranet-old/socket/php-fpm.socket;
+    server unix:/home/[user]/[site]/socket/php-fpm.socket;
     # также можно использовать веб-сокет и порт для взаимодействия, но это медленнее
     # server 127.0.0.1:12012;
 }
@@ -174,10 +174,10 @@ server {
 
 Эта конфигурация сообщает nginx, каким образом он отдаёт данные при обращении к **[адрес сайта]** по портам **8080** и **80**. Так, при обращении статическим и загруженным пользователем файлам, он отдаёт их из соответствующих каталогов, а остальные запросы будут перенаправляться через апстрим `php-fpm` в FPM который запустит PHP на исполнение и вернёт результат, назад через апстрим. Вся эта «балалайка» работает через юниксовкий файл-сокет `unix:///home/[user]/[site]/socket/[site].sock`.
 
-Чтобы nginx подключил наш новый файл конфигурации сайта нужно добавьте ссылку на него в каталог `/etc/nginx/sites-enabled/`: и удалить дефолтный из базовой настройки (нужны права администратора):
+Чтобы nginx подключил наш новый файл конфигурации сайта нужно добавьте ссылку на него в каталог `/etc/nginx/sites-enabled/`: и удалить (или переименовать, в базовых настройках nginx указано, что он реагирует только на настроечные файлы с расширением **.conf** в папке `/etc/nginx/conf.d/`) дефолтный конфиг из базовой настройки (нужны права администратора):
 ```bash
-sudo unlink /etc/nginx/sites-enabled/default
-sudo ln -s $HOME/[site]/conf/[site]_nginx.conf /etc/nginx/sites-enabled/
+sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.old
+sudo ln -s $HOME/[site]/conf/[site]_nginx.conf /etc/nginx/conf.d/
 ```
 
 Теперь нужно перезагрузить nginx
@@ -189,17 +189,19 @@ sudo service nginx restart
 nginx работает. То что всё в нём корректно проверяем командой: `systemctl status nginx.service`
 
 ```
-● nginx.service - nginx - high performance web server
-   Loaded: loaded (/lib/systemd/system/nginx.service; enabled)
-   Active: active (running) since Вт 2017-12-19 00:24:04 MSK; 2h 2min ago
+Loaded: loaded (/lib/systemd/system/nginx.service; enabled)
+   Active: active (running) since Пн 2017-12-25 16:00:54 MSK; 1min 42s ago
      Docs: http://nginx.org/en/docs/
-  Process: 22158 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
-  Process: 22156 ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
- Main PID: 22160 (nginx)
+  Process: 2035 ExecStop=/bin/kill -s TERM $MAINPID (code=exited, status=0/SUCCESS)
+  Process: 2039 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+  Process: 2038 ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+ Main PID: 2042 (nginx)
    CGroup: /system.slice/nginx.service
-           ├─22160 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
-           └─22161 nginx: worker process
+           ├─2042 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+           └─2043 nginx: worker process
 ```
+
+Если в выводе есть строка **Active: active (running)**, значит, web-сервер успешно установлен и запущен.
 
 Теперь можно переходить [к сборке из исходников PHP 5.2.17 и настройки его связки с FPM](make-php-5.2.17-for-debian-jessie.md).
 
