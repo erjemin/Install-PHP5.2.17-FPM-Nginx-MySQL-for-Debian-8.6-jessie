@@ -18,11 +18,17 @@ wget https://dev.mysql.com/get/mysql-apt-config_0.8.3-1_all.deb
 sudo dpkg -i mysql-apt-config*
 ```
 Во время установки вам будет представлен экран конфигурации, с помощью которого вы можете указать, какую версию MySQL нужно использовать, и установить репозитории других инструментов, связанных с MySQL:
+
 ![Экран установки репозитория MySQL](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-apt-mysql-01.png?raw=true "Экран установки репозитория MySQL")
+
 По умолчанию файл добавит информацию только о репозитории последней стабильной версии MySQL для выбронной ветки. Выберем ветку 5.7:
+
 ![Выбираем ветку 5.7 репозитория MySQL](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-apt-mysql-02.png?raw=true "Выбираем ветку 5.7 репозитория MySQL")
+
 После выберем **Ok** и **Enter**.
-![Заканчиваем подключение репозитория MySQL](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-apt-mysql-02.png?raw=true "Заканчиваем подключение репозитория MySQL")
+
+![Заканчиваем подключение репозитория MySQL](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-apt-mysql-03.png?raw=true "Заканчиваем подключение репозитория MySQL")
+
 После этого репозиторий будет добавлен на сервер. Обновим индекс пакетов (нужны права администратора):
 ```bash
 sudo apt-get update
