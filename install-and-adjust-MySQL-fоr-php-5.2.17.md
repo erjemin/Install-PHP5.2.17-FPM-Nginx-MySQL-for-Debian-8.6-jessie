@@ -35,98 +35,54 @@ sudo apt-get update
 ```
 Репозиторий MySQL добавлен. Если нужно будет обновить конфигурацию этих репозиториев, достаточно запустить `sudo dpkg-reconfigure mysql-apt-config` и повторно обновить индекс пакетов `sudo apt-get update`
 
-Теперь последнюю версию MySQL.
+Теперь установим последнюю версию MySQL.
 
-## установка MySQL
+## Установка MySQL
 
 Установка сервера базы данных MySQL исключительно проста. Достаточно одной команды (понадобятся права администратора):
 ```
 sudo apt-get install mysql-server
 ```
-В процессе установки будет дважды запрошен пароль ***root*** -- сперпользователя базы. На «боевых» серверах рекомендуется, чтобы пароль был посложнее и отличался от пароля нашего, текущего (и всех остальных) пользователей. Но сейчас это не важно. Главное, что мы будем использовать этот пароль дальше в инструкции, то обозначим его: «_secret_password_mysql_root_».
+Менеджер apt просмотрит все доступные пакеты mysql-server и выберет наиболее новую версию MySQL. Затем он определит зависимости программы и предложит подтвердить установку. Для этого нажмите «**y**» и «**Enter**».
 
+В процессе установки будет дважды запрошен пароль ***root*** -- сперпользователя базы.
 
+![Запрос root-пароля при установке MySQL](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-mysql-install-01.png?raw=true "Запрос root-пароля при установке MySQL")
 
+![Повторный запрос root-пароля при установке MySQL](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-mysql-install-02.png?raw=true "Повторный запрос root-пароля при установке MySQL")
 
+На «боевых» серверах рекомендуется, чтобы пароль был посложнее и отличался от пароля Unix-пользователя. Но сейчас это не важно. Главное, что мы будем использовать этот пароль дальше в инструкции, то обозначим его: «_secret_password_mysql_root_».
 
-
-
-
-2: Установка MySQL
-Установите новую версию MySQL:
-
-sudo apt-get install mysql-server
-
-Менеджер apt просмотрит все доступные пакеты mysql-server и выберет наиболее новую версию MySQL. Затем он определит зависимости программы и предложит подтвердить установку. Для этого нажмите y и Enter. После этого будет предложено установить root-пароль. Выберите и подтвердите надёжный пароль.
-
-СУБД MySQL установлена и запущена. Проверьте состояние MySQL:
-
+Проверем состояние MySQL:
+```bash
 systemctl status mysql
-mysql.service - MySQL Community Server
-Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
-Active: active (running) since Wed 2017-04-05 19:28:37 UTC; 3min 42s ago
-Main PID: 8760 (mysqld)
-CGroup: /system.slice/mysql.service
-└─8760 /usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid
+```
 
-Если в выводе есть строка Active: active (running), значит, СУБД успешно установлена и запущена.
+```bash
+● mysql.service - MySQL Community Server
+   Loaded: loaded (/lib/systemd/system/mysql.service; enabled)
+   Active: active (running) since Пн 2017-12-25 14:46:26 MSK; 20min ago
+  Process: 521 ExecStart=/usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid (code=exited, status=0/SUCCESS)
+  Process: 468 ExecStartPre=/usr/share/mysql/mysql-systemd-start pre (code=exited, status=0/SUCCESS)
+ Main PID: 530 (mysqld)
+   CGroup: /system.slice/mysql.service
+           └─530 /usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid
+```
 
-3: Безопасность MySQL
-MySQL поставляет команду, с помощью которой можно повысить безопасность свежей установки. Запустите её:
+Если в выводе есть строка Active: ***active (running)***, значит, СУБД успешно установлена и запущена.
 
-mysql_secure_installation
-
-Команда запросит root-пароль MySQL. Введите его и нажмите Enter. После этого команда задаст вам ряд вопросов.
-
-Для начала она предложит включить плагин проверки валидности паролей (он автоматически применяет определенные правила защиты паролей пользователей MySQL). Необходимость этого плагина полностью зависит от индивидуальных потребностей сервера. Чтобы включить его, введите y и Enter; чтобы пропустить этот вопрос, просто нажмите Enter. После включения плагина вам будет предложено выбрать уровень строгости проверки пароля (от 0 до 2). Выберите уровень и нажмите Enter, чтобы продолжить. Затем команда предложит изменить root-пароль. Поскольку это свежая установка и пароль был выбран совсем недавно, вы можете не менять его. Чтобы продолжить, нажмите Enter.
-
-На остальные вопросы можно ответить yes. Команда предложит удалить анонимных пользователей MySQL, запретить удаленный root-доступ, удалить тестовую базу данных и перезагрузить привилегии, чтобы все изменения вступили в силу. Введите y и нажмите Enter в каждом новом окне.
-
-Сценарий завершит свою работу после того как вы ответите на все вопросы.
-
-4: Тестирование установки MySQL
-mysqladmin – это клиент командной строки MySQL. Используйте его, чтобы подключиться к серверу и вывести  некоторую информацию о версии и состоянии MySQL:
-
-mysqladmin -u root -p version
-
-С помощью -u root клиент mysqladmin подключается как root- пользователь MySQL; флаг –p включает поддержку пароля, а version – это команда, которую нужно запустить.
-
-В выводе вы увидите версию сервера MySQL, время его безотказной работы и некоторую другую информацию о состоянии.
-
-mysqladmin  Ver 8.42 Distrib 5.7.17, for Linux on x86_64
-Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-Server version      5.7.17
-Protocol version    10
-Connection      Localhost via UNIX socket
-UNIX socket     /var/run/mysqld/mysqld.sock
-Uptime:         58 min 28 sec
-Threads: 1  Questions: 10  Slow queries: 0  Opens: 113  Flush tables: 1  Open tables: 106  Queries per second avg: 0.002
-
-Если вы получили такой результат, установка свежей версии MySQL прошла успешно!
-
-
-
-
-
-
-
-
-
-
+## Настройка баз и пользователей MySQL
 
 После установки MySQL автоматически запустится. Заходим в него под root-пользователем.
 ```bash
 mysql -u root -p secret_password_mysql_root
 ```
-
 Появится сообщение:
 ```sql
+Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 136
-Server version: 5.5.58-0+deb8u1 (Debian)
+Your MySQL connection id is 4
+Server version: 5.7.20 MySQL Community Server (GPL)
 
 Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
 
