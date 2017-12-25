@@ -57,7 +57,7 @@ sudo apt-get install mysql-server
 ```bash
 systemctl status mysql
 ```
-
+Получим:
 ```bash
 ● mysql.service - MySQL Community Server
    Loaded: loaded (/lib/systemd/system/mysql.service; enabled)
@@ -69,7 +69,7 @@ systemctl status mysql
            └─530 /usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid
 ```
 
-Если в выводе есть строка Active: ***active (running)***, значит, СУБД успешно установлена и запущена.
+Если в выводе есть строка Active: **active (running)**, значит, СУБД успешно установлена и запущена.
 
 ## Настройка баз и пользователей MySQL
 
