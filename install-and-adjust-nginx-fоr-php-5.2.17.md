@@ -72,7 +72,7 @@ rm $HOME/nginx_signing.key
 
 Устанавливаем (нужны права администратора):
 ```bash
-sudo art-get install nginx
+sudo apt-get install nginx
 ```
 Теперь можно запустить веб-сервер:
 ```bash
@@ -80,7 +80,7 @@ sudo service nginx start
 ```
 Убедиться что nginx работает корректно можно набрав: ***_http://[ip_нашего_серера]_***. Должна отображаться страница: **`Welcome to nginx on Debian!`**
 
-Установка с помощью `sudo art-get install nginx` уже произвела все необходимые настройки автозапуска. Но убедиться, что они работают можно, перегрузив компьютер (нужны права администратора):
+Установка с помощью `sudo apt-get install nginx` уже произвела все необходимые настройки автозапуска. Но убедиться, что они работают можно, перегрузив компьютер (нужны права администратора):
 ```bash
 sudo reboot
 ```
@@ -146,8 +146,7 @@ server {
     index index.php index.html index.htm;           # файлы которые web-сервер считает как индексные
 
     location ~ ^(.*\.php)$ {                        # обработчик файлов с расширение .php
-
-    fastcgi_pass    php-fpm;                        # upstream обрабатывающий обращений FPM (fastcgi)
+        fastcgi_pass    php-fpm;                    # upstream обрабатывающий обращений FPM (fastcgi)
         include         fastcgi_params;             # конфигурационный файл fastcgi;
         fastcgi_split_path_info			^(.+?\.php)(/.*)?$;
         # Вместо переменной "$document_root" можно указать адрес к корневому каталогу сервера и это желательно (см. http://wiki.nginx.org/Pitfalls)
@@ -177,13 +176,23 @@ server {
 Чтобы nginx подключил наш новый файл конфигурации сайта нужно добавьте ссылку на него в каталог `/etc/nginx/sites-enabled/`: и удалить (или переименовать, в базовых настройках nginx указано, что он реагирует только на настроечные файлы с расширением **.conf** в папке `/etc/nginx/conf.d/`) дефолтный конфиг из базовой настройки (нужны права администратора):
 ```bash
 sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.old
-sudo ln -s $HOME/[site]/conf/[site]_nginx.conf /etc/nginx/conf.d/
+sudo mkdir -p /etc/nginx/sites-enabled
+sudo ln -s $HOME/[site]/config/[site]_nginx.conf /etc/nginx/sites-enabled/
 ```
 
 Теперь нужно перезагрузить nginx
 ```bash
 sudo service nginx restart
 ```
+Должно все пройти гладко. Если выдваетя сообщение о оштбке:
+
+> Job for nginx.service failed. See 'systemctl status nginx.service' and 'journalctl -xn' for details.
+
+Значит в конфигурационном фале допущены ошибки. Для проверки конфига nginx на ошибки, используйм команду:
+```bash
+sudo nginx -c /home/[user]/[site]/config/[site]_nginx.conf -t
+```
+
 В результате статические файлы теперь будут отдаваться в браузер напрямую, а все php-скрипты через апстрим-сокеты перенаправляются в PHP.
 
 nginx работает. То что всё в нём корректно проверяем командой: `systemctl status nginx.service`

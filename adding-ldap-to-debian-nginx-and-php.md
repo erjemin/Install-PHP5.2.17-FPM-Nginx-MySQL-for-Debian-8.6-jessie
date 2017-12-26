@@ -129,7 +129,7 @@ sudo make install
 ```
 В конце, устаноdobr сообщит месторасположение файлов nginx. В частности, самого динамического модуля для поддежки LDAP `/usr/lib/nginx/modules/ngx_http_auth_ldap_module.so` и глобального конфигурационного файла nginx `/etc/nginx/nginx.conf`. Отредактируем последний чтобы задействовать собранный и уситановленный модуль. Для этого откроем для редактирования глобальный конфиг nginx (нужны права администратора):
 ```bash
-nano /etc/nginx/nginx.conf
+sudo nano /etc/nginx/nginx.conf
 ```
 И вставим вначале следующие строки:
 ```
@@ -145,6 +145,6 @@ sudo mkdir -p /etc/nginx/sites-enabled/
 ```
 Готово! Нам остается перезагрузить веб-сервер (нужны права администратора):
 ```bash
-service nginx reload
+sudo service nginx reload
 ```
 И убедиться, что nginx работает корректно, набрав: ***_http://[ip_нашего_серера]_***. Должна отображаться страница: **`Welcome to nginx on Debian!`**

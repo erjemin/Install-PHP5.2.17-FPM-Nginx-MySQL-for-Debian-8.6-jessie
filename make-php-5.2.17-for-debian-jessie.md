@@ -24,6 +24,7 @@ sudo apt-get install libxml2-dev \
                      libfcgi-dev \
                      libmhash-dev \
                      gcc \
+                     sudo apt-get install libssl-dev libcrypto++-dev lib32z1-dev libltdl-dev
                      make checkinstall
 ```
 Проверяем, что находимся в корне нашей домашней директории и получаем архив с исходниками PHP 5.2.17 из музея php.net:
@@ -86,7 +87,6 @@ sed -i 's/freetype2\/freetype/freetype/' configure
       --with-mcrypt \
       --with-gettext \
       --with-gd \
-      --with-jpeg-dir \
       --with-png-dir \
       --with-ttf \
       --with-curl \
@@ -100,7 +100,10 @@ sed -i 's/freetype2\/freetype/freetype/' configure
       --enable-fpm \
       --enable-force-cgi-redirect \
       --with-mysql=/usr/local/mysql \
-      --with-mysqli=/usr/bin/mysql_config
+      --with-mysqli=/usr/bin/mysql_config \
+      --with-ldap
+      --with-jpeg-dir \
+      --with-libdir=/lib/x86_64-linux-gnu
  ```
 Начнётся сборка-компиляция. В процессе её, из-за отсутствия тех или иных библиотек или модулей разработчика, могут возникать ошибки. При возникновении ошибок выдаётся диагностика, с её помощью можно понять каких модулей не хватает – до устанавливать их и пробовать компиляцию повторно. Неплохую (хотя и устаревшую) инструкцию по разрешению ошибок компиляции моно найти [по ссылке](http://denik.od.ua/rasprostranennye_oshibki_pri_kompilirovanii_php). Скорее всего вы не найдёте рекомендованных этой инструкцией библиотек в репозиториях ваших систем, но как минимум она поможет определиться с направлением «куда копать» для поиска рецептов по разрешению конфликтов сборки.
 
