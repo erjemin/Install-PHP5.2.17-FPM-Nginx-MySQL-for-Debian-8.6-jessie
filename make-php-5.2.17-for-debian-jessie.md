@@ -8,8 +8,7 @@
 
 ## Подготовка системы для компиляции PHP 5.2.17 и FPM
 
-Для сборки  5.2.17 и FPM из исходников в системы должны быть установлены разработческие версии некоторых пакетов и Си-компилятор и сборщик:
-
+Для сборки  5.2.17 и FPM из исходников в системы должны быть установлены разработческие версии некоторых пакетов, Си-компилятор и сборщик. Сам я очень долго мучился со сборокой. Пришлось пребрать кучу dev-пакетов чтобы получить вариант PHP 5.2.17 с поддержкой всех необходимых модулей (включая `-ldap` и `ldap-sasl`). Навернякак много пакетов было установлдено лишними (и это с учетом того, что многие из них тянут зависимости и по факут пакетов было установлено чуть более. чем дофига). Если вы хотите улучшить ваш сервер и избежать загрузки лиших пакетов, то вам предстоит самому выяснть, что предлагаемого ниже установлено напрасно:
 ```bash
 sudo apt-get install libxml2-dev \
                      libmysqlclient-dev \
@@ -23,8 +22,16 @@ sudo apt-get install libxml2-dev \
                      libmhash-dev \
                      libfcgi-dev \
                      libmhash-dev \
+                     libssl-dev libcrypto++-dev lib32z1-dev libltdl-dev \
+                     build-essential \
+                     libcurl4-openssl-dev \
+                     libexpat1-dev \
+                     libsasl2-dev \
+                     python-dev \
+                     libldap2-dev \
+                     libssl-dev \
+                     libpcre3-dev \
                      gcc \
-                     sudo apt-get install libssl-dev libcrypto++-dev lib32z1-dev libltdl-dev
                      make checkinstall
 ```
 Проверяем, что находимся в корне нашей домашней директории и получаем архив с исходниками PHP 5.2.17 из музея php.net:
@@ -101,7 +108,8 @@ sed -i 's/freetype2\/freetype/freetype/' configure
       --enable-force-cgi-redirect \
       --with-mysql=/usr/local/mysql \
       --with-mysqli=/usr/bin/mysql_config \
-      --with-ldap
+      --with-ldap \
+      --with-ldap-sasl \
       --with-jpeg-dir \
       --with-libdir=/lib/x86_64-linux-gnu
  ```
