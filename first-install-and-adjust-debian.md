@@ -1,5 +1,60 @@
 # Установка системы Debian (или аналога) и первичные настройки
 
+![Начинаем установку](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-01.png?raw=true "Начинаем установку")
+
+2
+
+![Продолжаем установку 2](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-02.png?raw=true "Продолжаем установку 2")
+3
+
+![Продолжаем установку 3](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-03.png?raw=true "Продолжаем установку 3")
+
+4
+
+![Продолжаем установку 4](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-04.png?raw=true "Продолжаем установку 4")
+
+5
+
+![Продолжаем установку 5](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-05.png?raw=true "Продолжаем установку 5")
+
+6
+
+![Продолжаем установку 6](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-06.png?raw=true "Продолжаем установку 6")
+
+7
+
+![Продолжаем установку 7](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-07.png?raw=true "Продолжаем установку 7")
+
+8
+
+![Продолжаем установку 8](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-08.png?raw=true "Продолжаем установку 8")
+
+9
+
+![Продолжаем установку 9](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-09.png?raw=true "Продолжаем установку 9")
+
+10
+
+![Продолжаем установку 10](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-10.png?raw=true "Продолжаем установку 10")
+
+11
+
+![Продолжаем установку 11](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-11.png?raw=true "Продолжаем установку 11")
+
+12
+
+![Продолжаем установку 12](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-12.png?raw=true "Продолжаем установку 12")
+
+13
+
+![Продолжаем установку 13](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-13.png?raw=true "Продолжаем установку 13")
+
+14
+
+![Продолжаем установку 14](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-14.png?raw=true "Продолжаем установку 14")
+
+ip addr
+
 ![Получаем наш IP с помощью команды ip addr](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-get-ip.png?raw=true "ip addr")
 
 ## Устанавливаем sudo

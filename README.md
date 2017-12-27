@@ -5,7 +5,7 @@
 Установку сервера состояла из следующих мероприятий:
 
 * [Установка системы Debian (или аналога) и первичные настройки](first-install-and-adjust-debian.md).
-* Настройка SSH и сплеш-скрина.
+* [Настройка SSH и сплеш-скрина](ssh-tuning.md).
 * [Установка и настройка MySQL](install-and-adjust-MySQL-fоr-php-5.2.17.md).
 * [Установка и настройка веб-сервера nginx](install-and-adjust-nginx-fоr-php-5.2.17.md).
 * [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
