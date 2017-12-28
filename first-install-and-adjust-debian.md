@@ -47,61 +47,51 @@
 Повторяем пароль:
 ![Продолжаем установку 14](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-14.png?raw=true "Продолжаем установку 14")
 
-15
-
+Указываем часовой пояс:
 ![Продолжаем установку 15](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-15.png?raw=true "Продолжаем установку 15")
 
-16
-
+Метод разметки диска:
 ![Продолжаем установку 16](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-16.png?raw=true "Продолжаем установку 16")
 
-17
-
+Указываем диск, который будет размечен:
 ![Продолжаем установку 17](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-17.png?raw=true "Продолжаем установку 17")
 
-18
-
+Выбираем схему разметки по партициям:
 ![Продолжаем установку 18](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-18.png?raw=true "Продолжаем установку 18")
 
-19
-
+Фиксируем разметку:
 ![Продолжаем установку 19](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-19.png?raw=true "Продолжаем установку 19")
 
-20
-
+Подтвержаем:
 ![Продолжаем установку 20](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-20.png?raw=true "Продолжаем установку 20")
 
-21
+Еще раз:
+![Продолжаем установку 21](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-21.png?raw=true "Продолжаем установку 21")
 
-![Продолжаем установку 21](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-11.png?raw=true "Продолжаем установку 21")
-
-22
-
+Соглашаемся, что мы готовы получать обновления из сети:
 ![Продолжаем установку 22](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-22.png?raw=true "Продолжаем установку 22")
 
-23
-
+Выбираем, географическое расположение репозиториев для получения обновлений `Российская Федерация`:
 ![Продолжаем установку 23](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-23.png?raw=true "Продолжаем установку 23")
 
-24
-
+...и что особую любовь мы испытываем к репозиториям Яндекс `mirror.yandex.ru`:
 ![Продолжаем установку 24](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-24.png?raw=true "Продолжаем установку 24")
 
-25
-
+Если для выхода в интернет мы используем proxy, укажем их тут:
 ![Продолжаем установку 25](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-25.png?raw=true "Продолжаем установку 25")
 
-26
-
+Из архива качается и устанавливается куча пакетов:
 ![Продолжаем установку 26](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-26.png?raw=true "Продолжаем установку 26")
 
-27
+Устанавливаем загрузчик:
+![Продолжаем установку 28](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-28.png?raw=true "Продолжаем установку 28")
 
+
+Система готова и надо перезагрузится:
 ![Продолжаем установку 27](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-27.png?raw=true "Продолжаем установку 27")
 
-28
+# базовая подготовка системы
 
-![Продолжаем установку 28](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-28.png?raw=true "Продолжаем установку 28")
 
 ip addr
 
