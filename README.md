@@ -17,12 +17,7 @@
 
 
 
-$mosConfig_live_site = 'http://10.3.2.171';
-$mosConfig_absolute_path = '/home/e-serg/intranet-old/html';
-$mosConfig_cachepath = '/home/e-serg/intranet-old/html/cache';
-$mosConfig_db = 'intranet';
-$mosConfig_password = 'qwaseR12';
-$mosConfig_user = 'e-serg';
+
 
 
 ----------------
