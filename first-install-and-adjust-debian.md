@@ -9,103 +9,133 @@
 ![Начинаем установку](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-01.png?raw=true "Начинаем установку")
 
 Выбираем локализацию `Russian - Русский`:
+
 ![Продолжаем установку 2](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-02.png?raw=true "Продолжаем установку 2")
 
 Выбираем регион `Российская Федерация`:
+
 ![Продолжаем установку 3](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-03.png?raw=true "Продолжаем установку 3")
 
 Указываем раскладку клавиатуры `Русская`:
+
 ![Продолжаем установку 4](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-04.png?raw=true "Продолжаем установку 4")
 
 Выбираем способ переключения клавиатуры:
+
 ![Продолжаем установку 5](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-05.png?raw=true "Продолжаем установку 5")
 
-Происходит загрузка дополнительных компанентов:
+Происходит загрузка дополнительных компонентов:
+
 ![Продолжаем установку 6](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-06.png?raw=true "Продолжаем установку 6")
 
 Указываем host-имя сервера:
+
 ![Продолжаем установку 7](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-07.png?raw=true "Продолжаем установку 7")
 
 Указываем имя домена (то, что справа от полного имени хоста):
+
 ![Продолжаем установку 8](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-08.png?raw=true "Продолжаем установку 8")
 
-Вводим пароль **root**-пользователя:
+Вводим пароль **root**-пользователя ***[root-pwd]***:
+
 ![Продолжаем установку 9](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-09.png?raw=true "Продолжаем установку 9")
 
-Повторяем пароль **root**:
+Повторяем пароль  ***[root-pwd]***:
+
 ![Продолжаем установку 10](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-10.png?raw=true "Продолжаем установку 10")
 
 Вводим имя пользователя-администратора:
+
 ![Продолжаем установку 11](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-11.png?raw=true "Продолжаем установку 11")
 
-Теперь логин администратора:
+Теперь логин администратора ***[user]***:
+
 ![Продолжаем установку 12](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-12.png?raw=true "Продолжаем установку 12")
 
-Пароль администратора:
+Пароль администратора ***[user_pwd]***:
+
 ![Продолжаем установку 13](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-13.png?raw=true "Продолжаем установку 13")
 
-Повторяем пароль:
+Повторяем пароль ***[user_pwd]***:
+
 ![Продолжаем установку 14](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-14.png?raw=true "Продолжаем установку 14")
 
 Указываем часовой пояс:
+
 ![Продолжаем установку 15](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-15.png?raw=true "Продолжаем установку 15")
 
 Метод разметки диска:
+
 ![Продолжаем установку 16](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-16.png?raw=true "Продолжаем установку 16")
 
 Указываем диск, который будет размечен:
+
 ![Продолжаем установку 17](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-17.png?raw=true "Продолжаем установку 17")
 
 Выбираем схему разметки по партициям:
+
 ![Продолжаем установку 18](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-18.png?raw=true "Продолжаем установку 18")
 
 Фиксируем разметку:
+
 ![Продолжаем установку 19](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-19.png?raw=true "Продолжаем установку 19")
 
-Подтвержаем:
+Подтверждаем:
+
 ![Продолжаем установку 20](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-20.png?raw=true "Продолжаем установку 20")
 
 Еще раз:
+
 ![Продолжаем установку 21](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-21.png?raw=true "Продолжаем установку 21")
 
 Соглашаемся, что мы готовы получать обновления из сети:
+
 ![Продолжаем установку 22](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-22.png?raw=true "Продолжаем установку 22")
 
 Выбираем, географическое расположение репозиториев для получения обновлений `Российская Федерация`:
+
 ![Продолжаем установку 23](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-23.png?raw=true "Продолжаем установку 23")
 
 ...и что особую любовь мы испытываем к репозиториям Яндекс `mirror.yandex.ru`:
+
 ![Продолжаем установку 24](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-24.png?raw=true "Продолжаем установку 24")
 
 Если для выхода в интернет мы используем proxy, укажем их тут:
+
 ![Продолжаем установку 25](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-25.png?raw=true "Продолжаем установку 25")
 
 Из архива качается и устанавливается куча пакетов:
+
 ![Продолжаем установку 26](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-26.png?raw=true "Продолжаем установку 26")
 
 Устанавливаем загрузчик:
+
 ![Продолжаем установку 28](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-28.png?raw=true "Продолжаем установку 28")
 
+Теперь система готова и надо перезагрузится:
 
-Система готова и надо перезагрузится:
 ![Продолжаем установку 27](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-27.png?raw=true "Продолжаем установку 27")
 
-# базовая подготовка системы
+## Базовая подготовка системы
 
-
-ip addr
+Если наш сервер получает IP-адреса через DHCP нужно узнать его IP. Логируется в систему и даем команду `ip addr`:
 
 ![Получаем наш IP с помощью команды ip addr](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-get-ip.png?raw=true "ip addr")
 
-## Устанавливаем sudo
+Теперь мы знаем IP по которому открыт SSH-доступ к нашему серверу. Можем логироваться через SSH и переходить к [настройкам SSH и сплеш-скрина](ssh-tuning.md). Но целесообразно сделать установку некоторых полезных пакетов:
 
-Для установки пакетов и доступа к системным конфигурационным файлам необходимы системные права `root`. Временно перейти к работе из под `root` можно командой `su`, а чтобы выйти из под 'root' в нашего обычного прользователя **[user]]** командой `exit`. Но постоянно прыгать из 'root' в **[user]** неудобно. Можно забыть выйти из под `root` и создать файлы или папки которые станут неоступны **[user]**. Для удобства и однозначного понимания какие команлды отдаются для `root` а какие для **[user]** существует пакет 'sudo'. Перейдем к работе из пол `root` и установим его:
+### Устанавливаем sudo
+
+Для установки пакетов и доступа к системным конфигурационным файлам необходимы системные права `root`. Временно перейти к работе из под `root` можно командой `su`, а чтобы выйти из под 'root' в нашего обычного пользователя **[user]]** — командой `exit`. Постоянно прыгать из 'root' в **[user]** неудобно. Можно забыть выйти из под `root` и создать файлы или папки которые станут недоступны **[user]**. Для удобства и однозначного понимания какие команды отдаются для `root` а какие для **[user]** существует пакет 'sudo'. Перейдем к работе из под `root` и установим его:
 
 ```bash
 su
+```
+Вводим ***[root-pwd]***:
+```bash
 apt-get install sudo
 ```
-Пока мы еще работаем под `root` нужно изменить правила, используемые *sudo* для принятия решения о предоставлении доступа. Они описаны с сисемнойм конфигурационнм файле `/etc/sudoers`. Открываем его на редактирование с помощью редактора *nano*:
+Пока мы еще работаем под `root` нужно изменить правила, используемые *sudo* для принятия решения о предоставлении доступа. Они описаны с системной конфигурационном файле `/etc/sudoers`. Открываем его на редактирование с помощью редактора *nano*:
 ```bash
 nano /etc/sudoers
 ```
@@ -115,8 +145,39 @@ nano /etc/sudoers
 ```
 Настройки закончены. Сохраняем файл `Ctrl+O` и `Enter`, а затем выходим из редактора nano `Ctrl+X`.
 
-Мы все еще работаем из-под `root`. Перезагружаем машину, чтобы настройки вступили в силу:
+### Установка дополнительных пактов
+
+Мы все еще работаем из-под `root`. Устанавливаем файл-менеджер `mc`:
+```bash
+apt-get install mc
+```
+Устанавливаем продвинутый системный монитор `htop`:
+```bash
+apt-get install htop
+```
+Устанавливаем службу точного времени `nlp`:
+```bash
+apt-get install ntp
+```
+Устанавливаем `LDAP` — службу поддержки Microsoaft Active Directory:
+ ```bash
+apt-get install ldap-utils
+```
+
+## Сервер готов
+Перезагружаем машину, чтобы настройки **sudo** вступили в силу:
 ```bash
 reboot
 ```
 
+
+---------------------
+
+## Переходим к дельнейшим меропиятиям:
+
+* [Настройка SSH и сплеш-скрина](ssh-tuning.md).
+* [Установка и настройка MySQL](install-and-adjust-MySQL-fоr-php-5.2.17.md).
+* [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
+* [Установка и настройка веб-сервера nginx](install-and-adjust-nginx-fоr-php-5.2.17.md).
+* [Настройка Joomla! 1.0.15](settings-config-for-Joolma-1.0.15.md) и настройка phpMyAdmin.
+* [Устанавка поддержки LDAP](adding-ldap-to-debian-nginx-and-php.md) — доступа к Active Directory.

@@ -4,7 +4,7 @@
 
 и проверка: https://wiki.it-kb.ru/unix-linux/linux-cli-tools/openldap-ldap-client-check-connection-to-active-directory-domain-controller-with-ldapsearch
 накатить:
-sudo apt-get install ldap-utils
+
 //sudo apt-get install libnss-ldapd (кажется не нужен)
 //спросит. Сказать "ldap://msk.rsvo.local" и "DC=msk,DC=rsvo,DC=local"
 
