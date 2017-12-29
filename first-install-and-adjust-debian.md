@@ -36,11 +36,11 @@
 
 ![Продолжаем установку 8](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-08.png?raw=true "Продолжаем установку 8")
 
-Вводим пароль **root**-пользователя ***[root-pwd]***:
+Вводим пароль **root**-пользователя **[root-pwd]**:
 
 ![Продолжаем установку 9](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-09.png?raw=true "Продолжаем установку 9")
 
-Повторяем пароль  ***[root-pwd]***:
+Повторяем пароль  **[root-pwd]**:
 
 ![Продолжаем установку 10](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-10.png?raw=true "Продолжаем установку 10")
 
@@ -48,15 +48,15 @@
 
 ![Продолжаем установку 11](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-11.png?raw=true "Продолжаем установку 11")
 
-Теперь логин администратора ***[user]***:
+Теперь логин администратора **[user]**:
 
 ![Продолжаем установку 12](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-12.png?raw=true "Продолжаем установку 12")
 
-Пароль администратора ***[user_pwd]***:
+Пароль администратора **[user_pwd]**:
 
 ![Продолжаем установку 13](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-13.png?raw=true "Продолжаем установку 13")
 
-Повторяем пароль ***[user_pwd]***:
+Повторяем пароль **[user_pwd]**:
 
 ![Продолжаем установку 14](https://github.com/erjemin/Install-PHP5.2.17-FPM-Nginx-MySQL-for-Debian-8.6-jessie/blob/master/img/Z-debian-install-14.png?raw=true "Продолжаем установку 14")
 
@@ -126,12 +126,12 @@
 
 ### Устанавливаем sudo
 
-Для установки пакетов и доступа к системным конфигурационным файлам необходимы системные права `root`. Временно перейти к работе из под `root` можно командой `su`, а чтобы выйти из под 'root' в нашего обычного пользователя **[user]]** — командой `exit`. Постоянно прыгать из 'root' в **[user]** неудобно. Можно забыть выйти из под `root` и создать файлы или папки которые станут недоступны **[user]**. Для удобства и однозначного понимания какие команды отдаются для `root` а какие для **[user]** существует пакет 'sudo'. Перейдем к работе из под `root` и установим его:
+Для установки пакетов и доступа к системным конфигурационным файлам необходимы системные права `root`. Временно перейти к работе из под `root` можно командой `su`, а чтобы выйти из под 'root' в нашего обычного пользователя **[user]** — командой `exit`. Постоянно прыгать из 'root' в **[user]** неудобно. Можно забыть выйти из под `root` и создать файлы или папки которые станут недоступны **[user]**. Для удобства и однозначного понимания какие команды отдаются для `root` а какие для **[user]** существует пакет 'sudo'. Перейдем к работе из под `root` и установим его:
 
 ```bash
 su
 ```
-Вводим ***[root-pwd]***:
+Вводим **[root-pwd]**, а затем:
 ```bash
 apt-get install sudo
 ```
