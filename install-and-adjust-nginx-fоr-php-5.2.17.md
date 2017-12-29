@@ -63,10 +63,7 @@ sudo apt-get update
 ```bash
 sudo apt-get upgrade
 ```
-Удаляем, теперь уже не нужный, PGP-ключ из корня домашней папки и освобождаем место:
-```bash
-rm $HOME/nginx_signing.key
-```
+
 
 ### Установка nginx
 

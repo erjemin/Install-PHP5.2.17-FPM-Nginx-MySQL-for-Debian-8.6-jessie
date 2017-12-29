@@ -22,7 +22,10 @@ sudo apt-get install libxml2-dev \
                      libmhash-dev \
                      libfcgi-dev \
                      libmhash-dev \
-                     libssl-dev libcrypto++-dev lib32z1-dev libltdl-dev \
+                     libssl-dev \
+                     libcrypto++-dev \
+                     lib32z1-dev \
+                     libltdl-dev \
                      build-essential \
                      libcurl4-openssl-dev \
                      libexpat1-dev \

@@ -11,6 +11,7 @@
 * [Установка и настройка веб-сервера nginx](install-and-adjust-nginx-fоr-php-5.2.17.md).
 * [Настройка Joomla! 1.0.15](settings-config-for-Joolma-1.0.15.md) и настройка phpMyAdmin.
 * [Доустанавливаем поддержку LDAP](adding-ldap-to-debian-nginx-and-php.md) -- доступ к Active Directory.
+* [Чистим систему от лишних модулей](claen.md).
 
 
 
