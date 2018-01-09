@@ -1,7 +1,9 @@
-## Предыдущие разделы:
-* [Установка системы Debian (или аналога) и первичные настройки](first-install-and-adjust-debian.md).
+### Развертывание современного веб-сервера под старые проекты на PHP 5.2.17
 
-# Настраиваем SSH-доступ
+## Предыдущие этапы:
+* 1. [Установка системы Debian (или аналога) и первичные настройки](first-install-and-adjust-debian.md).
+
+# 2: Настройка SSH и окружения клиента
 
 После завершения перезагрузки поизведенной в конце предыдущего разедела мы можем заходить нанаш сервер по SSH под новым, только что созданным пользователем ***[user]*** и паролем ***[user_pwd]***, но можно сразу сделать небольшие изменения в файле `/etc/ssh/sshd_config` -- конфигурации ssh-доступа:
 
@@ -120,11 +122,11 @@ sudo reboot
 
 ---------------
 
-## Переходим к дельнейшим меропиятиям:
+## Следующие этапы:
 
-* [Установка и настройка MySQL](install-and-adjust-MySQL-fоr-php-5.2.17.md).
-* [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
-* [Установка и настройка веб-сервера nginx](install-and-adjust-nginx-fоr-php-5.2.17.md).
-* [Настройка Joomla! 1.0.15](settings-config-for-Joolma-1.0.15.md) и настройка phpMyAdmin.
-* [Устанавка поддержки LDAP](adding-ldap-to-debian-nginx-and-php.md) — доступа к Active Directory.
-
+* 3. [Установка и настройка MySQL](install-and-adjust-MySQL-fоr-php-5.2.17.md).
+* 4. [Сборка и настройка допотопного PHP 5.2.17 вместе с FPM](make-php-5.2.17-for-debian-jessie.md).
+* 5. [Установка и настройка веб-сервера nginx](install-and-adjust-nginx-fоr-php-5.2.17.md).
+* 6. [Настройка Joomla! 1.0.15](settings-config-for-Joolma-1.0.15.md) и настройка phpMyAdmin.
+* 7. [Доустанавливаем поддержку LDAP](adding-ldap-to-debian-nginx-and-php.md) -- доступ к Active Directory.
+* 8. [Чистим систему от лишних модулей](claen.md).

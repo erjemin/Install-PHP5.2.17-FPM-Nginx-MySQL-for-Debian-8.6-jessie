@@ -230,3 +230,26 @@ git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module.git
     --add-module=/home/e-serg/ngx_http_substitutions_filter_module \
     --add-module=/home/e-serg/nginx-auth-ldap
 ```
+
+
+
+
+----------------
+
+
+конверер пакетов
+sudo apt-get install alien
+модуль найти
+http://www.rpm-find.net/linux/rpm2html/search.php?query=php-ldap
+скачать
+wget ftp://ftp.pbone.net/mirror/yum.jasonlitka.com/EL5/x86_64/php-ldap-5.2.17-jason.2.x86_64.rpm
+конвертнуть
+sudo alien --to-deb php-ldap-5.2.17-jason.2.x86_64.rpm
+некатить
+sudo dpkg -i php-ldap_5.2.17-1_amd64.deb
+
+получаем git
+sudo apt-get install git
+
+
+sudo dpkg -l | grep nginx
