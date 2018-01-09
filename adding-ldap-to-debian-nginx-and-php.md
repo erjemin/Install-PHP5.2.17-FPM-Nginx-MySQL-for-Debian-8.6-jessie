@@ -253,3 +253,22 @@ sudo apt-get install git
 
 
 sudo dpkg -l | grep nginx
+
+
+
+#### *Примечание 2:*
+**Возможно это необходимо только для установки модулей ldap для веб-серверов Apache**
+
+*Для Debian (Ubuntu и т.п.) можно (или нужно **дополнительно**) установить модуль `php-ldap`. Для нашей старой PHP 5.2.17 этот  модуль из репозиториев недоступен. Найти его тоже не получилось. Нашлись [php-ldap модули для CentOS](http://www.rpm-find.net/linux/rpm2html/search.php?query=php-ldap). Их можно конвертировать в модули для Debian. Сначала нужно установить конвертер `alien` (нужны права администратора):*
+```bash
+sudo apt-get install alien
+```
+*Скачиваем нужный для нашей операционной системы и версии PHP модуль (ищем URL на странице по ссылке выше):*
+```bash
+wget ftp://ftp.pbone.net/mirror/yum.jasonlitka.com/EL5/x86_64/php-ldap-5.2.17-jason.2.x86_64.rpm
+```
+*Конвертируем и устанавливаем (нужны права администратора):*
+```bash
+sudo alien --to-deb php-ldap-5.2.17-jason.2.x86_64.rpm
+sudo dpkg -i php-ldap_5.2.17-1_amd64.deb
+```
