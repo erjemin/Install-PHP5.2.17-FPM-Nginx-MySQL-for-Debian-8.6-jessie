@@ -27,7 +27,10 @@
 Проверяем работу LDAP:
 
 ```bash
-ldapsearch -H "ldap://[ldap-server-address]" -b "OU=Пользователи домена,DC=[name1],DC=[name2],DC=[name3]" -D "[ldap-user]" -w '[ldpa-user-password]'
+ldapsearch -H "ldap://[ldap-server-address]" \
+           -b "OU=Пользователи домена,DC=[name1],DC=[name2],DC=[name3]" \
+           -D "[ldap-user]" \
+           -w '[ldpa-user-password]'
 ```
 
 В ответ получим отклик LDAP-сервера.
