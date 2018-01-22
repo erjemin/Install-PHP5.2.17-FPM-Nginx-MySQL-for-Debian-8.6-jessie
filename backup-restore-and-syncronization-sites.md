@@ -39,7 +39,7 @@ sudo apt-get install zip
 nano ~/[site]/backup.sh
 ```
 
-И поместим в него следующие коменды:
+И поместим в него следующие коменды (не забываем меняьт **[db-user]** и **[secret_password_mysql_user]** на свои значения):
 
 ```bash
 echo "ДАМП и АРХИВИРОВАНИЕ БАЗЫ!";
@@ -91,6 +91,7 @@ echo "    \`-.-' \\ )-\`( , o o)";
 echo " УРА!     \`-    \\\`_\`\"'-  Всё получилось! Вот вам котик за старания!";
 echo "";
 ```
+Сохраняем `Ctrl+O` и `Enter`, и выходим из редактора `Ctrl+X`.
 
 Испыттаем наш скрипт. Переходим в папку с сайтом и запускам его:
 
@@ -125,8 +126,6 @@ tmpfs              248M            0  248M            0% /sys/fs/cgroup
 (,-.`._,'(       |\`-/|
     `-.-' \ )-`( , o o)
  УРА!     `-    \`_`"'-  Всё получилось! Вот вам котик за старания!
-
-
 ```
 
 Проверим, что скрипт отработал и в папке появились архивы:
@@ -154,25 +153,179 @@ ls -sh1t
 
 Теперь нужно научиться восстанавливать сайт из этой резервной копии.
 
-## Backup-скрипт
+
+## Restore-скрипт
 
 ### Подготовительный этап
 
-Для создания архивов нам понадобится zip. Установим его (нужны права администратора):
+Для распковки архивов нам понадобится unzip. Установим его (нужны права администратора):
 
 ```bash
-sudo apt-get install zip
+sudo apt-get install unzip
 ```
 
-### Состав вкрипта backup
+### Состав вкрипта restore
 
-Нам потребуется получить дамп всех баз из MySQL, сделать архивы с меткой времени и заархивипровать файлы сайта. Создадим скрпит   в папке **[site]**:
+Нам потребуется найти самый свежий архив дампом каждой базы (если этих архивов несколько), распаковать каждый из них, восстановть базу в MySQL, незабыв удалить прометочный, распакованный, файл дампа. И з-атем проделать тодже самое, с файлами сайта. При этом нам достаточно распаковать только измененные файлы, но при этом защитить от изменений конфигурационный файл сайта -- `$HOME/[site]/html/configuration.php`.  Создадим скрипт в папке **[site]**:
 
 ```bash
-nano ~/[site]/backup.sh
+nano ~/[site]/restore.sh
 ```
 
-И поместим в него следующие коменды:
+И поместим в него следующие команды (не забываем меняьт **[db-user]** и **[secret_password_mysql_user]** на свои значения):
 
 ```bash
-echo "ДАМП и АРХИВИРОВАНИЕ БАЗЫ!";
+echo "Восстановление базы из ДАМПа и АРХИВИРОВов!";
+echo "?";
+echo -ne "??распаковываем дамп INTRANET: ";
+if ls -d db-backup-intranet-*.sql.zip >/dev/null 2>&1;
+  # получаем самый свежий файл из множества
+  FileName=$(ls -tN db-backup-intranet-*.sql.zip | head -1);
+  echo $FileName;
+  then
+    if [ -f "intranet.sql" ]; then rm intranet.sql; fi;
+    unzip -q $FileName;
+    if [ $? -ne 0 ];then echo "ОШИБКА: не удалось распаковать архив!"; exit 1; fi
+  else  echo "ОШИБКА: нет файла архива!";  exit 1;
+fi;
+echo -ne "? получен:			 ";
+ls -sh --color=always intranet.sql;
+echo -ne "? посылаем дамп в MySQL:	 ";
+mysql -u[db-user] -p[secret_password_mysql_user] intranet < intranet.sql
+if [ $? -ne 0 ];
+  then echo "ОШИБКА: бамп не всосался! Или сломана MySQL, или дамп, или произошло что-то непонятное!"; exit 1;
+else echo "Ok!" ;fi;
+rm intranet.sql;
+
+echo "?";
+echo -ne "??распаковываем дамп PHONES2:	 ";
+if ls -d db-backup-phones2--*.sql.zip >/dev/null 2>&1;
+  # получаем самый свежий файл из множества
+  FileName=$(ls -tN db-backup-phones2--*.sql.zip | head -1);
+  echo $FileName;
+  then
+    if [ -f "phones2.sql" ]; then rm phones2.sql; fi;
+    unzip -q $FileName;
+    if [ $? -ne 0 ];then echo "ОШИБКА: не удалось распаковать архив!"; exit 1; fi
+  else  echo "ОШИБКА: нет файла архива!";  exit 1;
+fi;
+echo -ne "? получен:			 ";
+ls -sh --color=always phones2.sql;
+echo -ne "? посылаем дамп в MySQL:	 ";
+mysql -u[db-user] -p[secret_password_mysql_user] phones2 < phones2.sql
+if [ $? -ne 0 ];
+  then echo "ОШИБКА: бамп не всосался! Или сломана MySQL, или дамп, или произошло что-то непонятное!"; exit 1;
+else echo "Ok!" ;fi
+rm phones2.sql;
+
+echo "?";
+echo -ne "??распаковываем дамп REESRT:	 ";
+if ls -d db-backup-reestr---*.sql.zip >/dev/null 2>&1;
+  # получаем самый свежий файл из множества
+  FileName=$(ls -tN db-backup-reestr---*.sql.zip | head -1);
+  echo $FileName;
+  then
+    if [ -f "reestr.sql" ]; then rm reeset.sql; fi;
+    unzip -q $FileName;
+    if [ $? -ne 0 ];then echo "ОШИБКА: не удалось распаковать архив!"; exit 1; fi
+  else  echo "ОШИБКА: нет файла архива!";  exit 1;
+fi;
+echo -ne "? получен:			 ";
+ls -sh --color=always reestr.sql;
+echo -ne "? посылаем дамп в MySQL:	 ";
+mysql -u[db-user] -p[secret_password_mysql_user] reestr < reestr.sql
+if [ $? -ne 0 ];
+   then echo "ОШИБКА: бамп не всосался! Или сломана MySQL, или дамп, или произошло что-то непонятное!"; exit 1;
+else echo "Ok!" ;fi
+rm reestr.sql;
+
+echo "?";
+echo -ne "??целосность архива HTML:	 ";
+if ls -d html-backup--------*.zip >/dev/null 2>&1;
+  # получаем самый свежий файл из множества
+  FileName=$(ls -tN html-backup--------*.zip | head -1);
+  then
+    unzip -t -qq $FileName;
+    if [ $? -ne 0 ];
+      then echo "ОШИБКА: нарушена целостность архива!"; exit 1;
+      else
+        echo "Ok!";
+        echo "?";
+        echo -ne "??распаковываем архив HTML:	 ";
+        unzip -u -o -C -qq $FileName -x html/configuration.php;
+        if [ $? -ne 0 ];
+          then echo "ОШИБКА: не удалось распаковать!";
+        else echo "Ok!";
+        fi;
+    fi;
+  else  echo "ОШИБКА: нет файла архива!";  exit 1;
+fi;
+
+echo "";
+df -h
+echo "";
+echo ""
+echo "      |\      _,,,---,,_"
+echo "ZZZzz /,\`.-'\`'    -.  ;-;;,_"
+echo "     |,4-  ) )-,_. ,\ (  \`'-'"
+echo "    '---''(_/--'  \`-'\_)  "
+echo ""
+```
+Сохраняем `Ctrl+O` и `Enter`, и выходим из редактора `Ctrl+X`.
+
+Испыттаем наш restore-скрипт. Переходим в папку с сайтом и запускам его:
+
+```bash
+cd [site]
+bash restore.sh
+```
+
+В ответ получим (нужно подождать... работа с большими архивами дело не быстрое):
+
+```txt
+Восстановление базы из ДАМПа и АРХИВИРОВов!
+?
+??распаковываем дамп INTRANET: db-backup-intranet-2018-01-22~16:43:51.sql.zip
+? получен:			 105M intranet.sql
+? посылаем дамп в MySQL:	 Ok!
+?
+??распаковываем дамп PHONES2:	 db-backup-phones2--2018-01-22~16:44:06.sql.zip
+? получен:			 376K phones2.sql
+? посылаем дамп в MySQL:	 Ok!
+?
+??распаковываем дамп REESRT:	 db-backup-reestr---2018-01-22~16:44:06.sql.zip
+? получен:			 55K reestr.sql
+? посылаем дамп в MySQL:	 Ok!
+?
+??целосность архива HTML:	 Ok!
+?
+??распаковываем архив HTML:	 Ok!
+?
+Файловая система Размер Использовано  Дост Использовано% Cмонтировано в
+/dev/sda1           15G          13G  1,5G           91% /
+udev                10M            0   10M            0% /dev
+tmpfs               99M         4,4M   95M            5% /run
+tmpfs              248M            0  248M            0% /dev/shm
+tmpfs              5,0M            0  5,0M            0% /run/lock
+tmpfs              248M            0  248M            0% /sys/fs/cgroup
+
+
+      |\      _,,,---,,_
+ZZZzz /,`.-'`'    -.  ;-;;,_
+     |,4-  ) )-,_. ,\ (  `'-'
+    '---''(_/--'  `-'\_)
+
+```
+
+Для проверки можем удалить отдельные файлы или папки из каталога `~/[site]/html` и уведиться, что после отработки нашего скрирта `restore.sh` эти папки и каталоги восстанавливаются.
+
+Теперь нужно научить основной сервер отправлять backup-аривы на резервный севрер.
+
+
+## Скрипт Send-Backup
+
+### Подготовительный этап -- защищенная, шифрованная связь между серверами
+
+Для того. чтобы мы могли пересылать с одного сервера на другой файты, и исполняьт команы на удаленном сервере не вводя каждый раз пароль, нужно настроить шифрованый ssh-канал между серверами.
+
+
