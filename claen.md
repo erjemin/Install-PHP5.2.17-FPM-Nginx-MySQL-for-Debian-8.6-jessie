@@ -45,3 +45,8 @@ sudo apt-get purge имя-пакета
 sudo apt-get autoremove
 ```
 
+---------------
+
+## Следующие этапы:
+
+* 9. [Резервный сайт, резервное копирование и восстановление сайта и синхронизация](backup-restore-and-syncronization-sites.md).
